@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<ruleset name="WMDE">
+	<!-- See https://github.com/wikimedia/mediawiki-tools-codesniffer/blob/master/MediaWiki/ruleset.xml -->
+	<rule ref="vendor/mediawiki/mediawiki-codesniffer/MediaWiki">
+		<!-- We disagree with enforcing this as a hard rule -->
+		<exclude name="MediaWiki.WhiteSpace.SpaceBeforeSingleLineComment" />
+	</rule>
+
+	<!-- NOTE: We purposely decided against all Generic.CodeAnalysis.… sniffs, because they all have
+		possible exceptions, and are not meant to block patches from being merged. -->
+
+	<rule ref="Generic.ControlStructures" />
+
+	<rule ref="Generic.Files.InlineHTML" />
+	<rule ref="Generic.Files.LineLength">
+		<properties>
+			<!-- The inherited "lineLimit" from the base MediaWiki ruleset is 100. -->
+			<property name="absoluteLineLimit" value="140" />
+		</properties>
+		<!-- Exclude auto-generated files from the Translate extension, see magic-export.php. -->
+		<exclude-pattern>\.i18n\.magic\.php</exclude-pattern>
+	</rule>
+	<rule ref="Generic.Files.OneClassPerFile" />
+	<rule ref="Generic.Files.OneInterfacePerFile" />
+	<rule ref="Generic.Files.OneTraitPerFile" />
+
+	<!-- NOTE: Never add the Generic.Metrics.… sniffs to this generic rule set, because these are
+		not about "code style", and the exact limits are highly disputable. -->
+
+	<rule ref="Generic.PHP.CharacterBeforePHPOpeningTag" />
+
+	<rule ref="PSR1">
+		<exclude name="PSR1.Files.SideEffects" />
+	</rule>
+	<rule ref="PSR1.Methods.CamelCapsMethodName.NotCamelCaps">
+		<!-- Exclude test methods like "testGivenInvalidInput_methodThrowsException". -->
+		<exclude-pattern>tests*Test*\.php</exclude-pattern>
+	</rule>
+
+	<rule ref="PSR2.Files" />
+
+	<!-- NOTE: We can not use the Squiz.Arrays.ArrayBracketSpacing sniff because it conflicts with
+		the MediaWiki style that encourages to use spaces inside brackets. -->
+	<rule ref="Squiz.Classes.DuplicateProperty" />
+	<rule ref="Squiz.Classes.SelfMemberReference" />
+	<rule ref="Squiz.ControlStructures.ControlSignature" />
+	<rule ref="Squiz.Functions.FunctionDuplicateArgument" />
+	<rule ref="Squiz.Functions.GlobalFunction" />
+	<rule ref="Squiz.Scope" />
+
+	<!-- TODO: Do we want this to be an enforced rule for all our code?
+	<rule ref="Squiz.Strings.DoubleQuoteUsage">
+		<exclude name="Squiz.Strings.DoubleQuoteUsage.ContainsVar" />
+	</rule> -->
+
+	<rule ref="Squiz.WhiteSpace.FunctionSpacing">
+		<properties>
+			<property name="spacing" value="1" />
+		</properties>
+	</rule>
+	<rule ref="Squiz.WhiteSpace.OperatorSpacing">
+		<properties>
+			<property name="ignoreNewlines" value="true" />
+		</properties>
+	</rule>
+
+	<arg name="extensions" value="php" />
+	<arg name="encoding" value="utf8" />
+	<exclude-pattern type="relative">^vendor/</exclude-pattern>
+</ruleset>

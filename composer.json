@@ -1,0 +1,15 @@
+{
+	"name": "wmde/wmde-codesniffer",
+	"description": "Wikimedia Deutschland CodeSniffer standards",
+	"homepage": "https://www.mediawiki.org/wiki/Wikibase/Coding_conventions",
+	"license": "GPL-2.0+",
+	"authors": [
+		{
+			"name": "Thiemo Mättig"
+		}
+	],
+	"require": {
+		"php": ">=5.5.9",
+		"mediawiki/mediawiki-codesniffer": ">=0.4 <0.8"
+	}
+}
