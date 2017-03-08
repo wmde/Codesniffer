@@ -1,5 +1,5 @@
-# Wikimedia Deutschland CodeSniffer standards changelog
+# Wikibase CodeSniffer standards changelog
 
-## 0.1.0 (2017-02-20)
+## 0.1.0 (2017-03-08)
 
 * Initial tagged release

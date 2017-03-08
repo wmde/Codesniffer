@@ -1,5 +1,5 @@
-Wikimedia Deutschland CodeSniffer standards
-===========================================
+Wikibase CodeSniffer standards
+==============================
 
 Abstract
 --------
@@ -15,7 +15,7 @@ How to install
     ```
     {
     	"require-dev": {
-    		"wmde/wmde-codesniffer": "0.1.0"
+    		"wikibase/wikibase-codesniffer": "0.1.0"
     	},
     	"scripts": {
     		"test": [
@@ -30,7 +30,7 @@ How to install
     ```
     <?xml version="1.0"?>
     <ruleset>
-    	<rule ref="vendor/wmde/wmde-codesniffer/WMDE"/>
+    	<rule ref="vendor/wikibase/wikibase-codesniffer/Wikibase"/>
 
     	<file>.</file>
     </ruleset>

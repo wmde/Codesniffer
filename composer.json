@@ -1,6 +1,6 @@
 {
-	"name": "wmde/wmde-codesniffer",
-	"description": "Wikimedia Deutschland CodeSniffer standards",
+	"name": "wikibase/wikibase-codesniffer",
+	"description": "Wikibase CodeSniffer standards",
 	"homepage": "https://www.mediawiki.org/wiki/Wikibase/Coding_conventions",
 	"license": "GPL-2.0+",
 	"authors": [
