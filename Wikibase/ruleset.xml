@@ -2,24 +2,30 @@
 <ruleset name="Wikibase">
 	<!-- See https://github.com/wikimedia/mediawiki-tools-codesniffer/blob/master/MediaWiki/ruleset.xml -->
 	<rule ref="vendor/mediawiki/mediawiki-codesniffer/MediaWiki">
-		<!-- We disagree with enforcing this as a hard rule -->
+		<!-- Even if we encourage to use spaces in comments, we disagree with this sniff blocking
+			patches from being merged. -->
 		<exclude name="MediaWiki.WhiteSpace.SpaceBeforeSingleLineComment" />
 	</rule>
 
 	<!-- NOTE: We purposely decided against all Generic.CodeAnalysis.… sniffs, because they all have
 		possible exceptions, and are not meant to block patches from being merged. -->
 
+	<!-- Enforces to use curly brackets after if ( … ) and other control structures, even if only a
+		single token follows. -->
 	<rule ref="Generic.ControlStructures" />
 
+	<!-- Disallows any content outside of <?php … ?> tags. -->
 	<rule ref="Generic.Files.InlineHTML" />
+
 	<rule ref="Generic.Files.LineLength">
 		<properties>
-			<!-- The inherited "lineLimit" from the base MediaWiki ruleset is 100. -->
+			<!-- The inherited "lineLimit" from the base MediaWiki rule set is 100. -->
 			<property name="absoluteLineLimit" value="140" />
 		</properties>
 		<!-- Exclude auto-generated files from the Translate extension, see magic-export.php. -->
 		<exclude-pattern>\.i18n\.magic\.php</exclude-pattern>
 	</rule>
+
 	<rule ref="Generic.Files.OneClassPerFile" />
 	<rule ref="Generic.Files.OneInterfacePerFile" />
 	<rule ref="Generic.Files.OneTraitPerFile" />
@@ -29,7 +35,10 @@
 
 	<rule ref="Generic.PHP.CharacterBeforePHPOpeningTag" />
 
+	<!-- See http://www.php-fig.org/psr/psr-1/ -->
 	<rule ref="PSR1">
+		<!-- Entry points typically have side effects, which is why this sniff is a "should" and not
+			a "must" in PSR-1. -->
 		<exclude name="PSR1.Files.SideEffects" />
 	</rule>
 	<rule ref="PSR1.Methods.CamelCapsMethodName.NotCamelCaps">
@@ -37,29 +46,47 @@
 		<exclude-pattern>tests*Test*\.php</exclude-pattern>
 	</rule>
 
+	<!-- Enforces a single black line at the end of the file. See
+		http://www.php-fig.org/psr/psr-2/#files -->
 	<rule ref="PSR2.Files" />
 
 	<!-- NOTE: We can not use the Squiz.Arrays.ArrayBracketSpacing sniff because it conflicts with
 		the MediaWiki style that encourages to use spaces inside brackets. -->
-	<rule ref="Squiz.Classes.DuplicateProperty" />
+
+	<!-- Makes sure self::… is used instead of repeating the class name. -->
 	<rule ref="Squiz.Classes.SelfMemberReference" />
+
+	<!-- Makes sure control structures like if ( … ), for ( …; …; … ) etc. properly use spaces. -->
 	<rule ref="Squiz.ControlStructures.ControlSignature" />
+
+	<!-- Complains about duplicate parameter names in function headers. -->
 	<rule ref="Squiz.Functions.FunctionDuplicateArgument" />
+
 	<rule ref="Squiz.Functions.GlobalFunction" />
+
+	<!-- Currently contains the following sniffs:
+		- Everything in a class must have one of the private, protected, or public keywords.
+		- Static members can not be called with $this->…. -->
 	<rule ref="Squiz.Scope" />
 
-	<!-- TODO: Do we want this to be an enforced rule for all our code?
+	<!-- TODO: Do we want this to be an enforced sniff for all our code?
 	<rule ref="Squiz.Strings.DoubleQuoteUsage">
 		<exclude name="Squiz.Strings.DoubleQuoteUsage.ContainsVar" />
 	</rule> -->
 
+	<!-- Enforces one empty line before and after each method in a class. -->
 	<rule ref="Squiz.WhiteSpace.FunctionSpacing">
 		<properties>
+			<!-- The sniffs default is two empty lines. -->
 			<property name="spacing" value="1" />
 		</properties>
 	</rule>
+
+	<!-- Makes sure operators are surrounded by spaces. This includes comparisons, assignments, and
+		stuff like 1 / 60. -->
 	<rule ref="Squiz.WhiteSpace.OperatorSpacing">
 		<properties>
+			<!-- But we need to allow splitting long lines. -->
 			<property name="ignoreNewlines" value="true" />
 		</properties>
 	</rule>
