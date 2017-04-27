@@ -15,7 +15,7 @@ How to install
     ```
     {
     	"require-dev": {
-    		"wikibase/wikibase-codesniffer": "0.1.0"
+    		"wikibase/wikibase-codesniffer": "^0.2.0"
     	},
     	"scripts": {
     		"test": [

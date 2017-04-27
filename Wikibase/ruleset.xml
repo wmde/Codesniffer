@@ -76,6 +76,9 @@
 		<exclude name="Squiz.Strings.DoubleQuoteUsage.ContainsVar" />
 	</rule> -->
 
+	<!-- Disallows spaces in ( int )$var type casts. -->
+	<rule ref="Squiz.WhiteSpace.CastSpacing" />
+
 	<!-- Enforces one empty line before and after each method in a class. -->
 	<rule ref="Squiz.WhiteSpace.FunctionSpacing">
 		<properties>
