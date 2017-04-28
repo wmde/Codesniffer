@@ -3,8 +3,8 @@
 	<!-- This rule set includes all rules from the MediaWiki rule set, see
 		https://github.com/wikimedia/mediawiki-tools-codesniffer/blob/master/MediaWiki/ruleset.xml
 		-->
-	<rule ref="vendor/mediawiki/mediawiki-codesniffer/MediaWiki">
-		<!-- Even if we encourage to use spaces in comments, we disagree with this sniff blocking
+	<rule ref="./vendor/mediawiki/mediawiki-codesniffer/MediaWiki">
+		<!-- Even if we encourage to use spaces in comments, we don't think this sniff should block
 			patches from being merged. -->
 		<exclude name="MediaWiki.WhiteSpace.SpaceBeforeSingleLineComment" />
 	</rule>
@@ -72,10 +72,8 @@
 		- Static members can not be called with $this->…. -->
 	<rule ref="Squiz.Scope" />
 
-	<!-- TODO: Do we want this to be an enforced sniff for all our code?
-	<rule ref="Squiz.Strings.DoubleQuoteUsage">
-		<exclude name="Squiz.Strings.DoubleQuoteUsage.ContainsVar" />
-	</rule> -->
+	<!-- NOTE: Do not add the Squiz.Strings.DoubleQuoteUsage sniff. Even if we encourage to prefer
+		single quotes, we don't think double quotes should block patches from being merged. -->
 
 	<!-- Disallows spaces in ( int )$var type casts. -->
 	<rule ref="Squiz.WhiteSpace.CastSpacing" />
@@ -89,7 +87,7 @@
 	</rule>
 
 	<!-- Makes sure operators are surrounded by spaces. This includes comparisons, assignments, and
-		stuff like 1 / 60. -->
+		calculations like 1 / 60. -->
 	<rule ref="Squiz.WhiteSpace.OperatorSpacing">
 		<properties>
 			<!-- But we need to allow splitting long lines. -->
@@ -98,7 +96,7 @@
 	</rule>
 
 	<arg name="extensions" value="php" />
-	<arg name="encoding" value="utf8" />
+	<arg name="encoding" value="UTF-8" />
 	<exclude-pattern type="relative">^extensions/</exclude-pattern>
 	<exclude-pattern type="relative">^node_modules/</exclude-pattern>
 	<exclude-pattern type="relative">^vendor/</exclude-pattern>
