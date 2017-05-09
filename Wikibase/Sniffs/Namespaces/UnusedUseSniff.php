@@ -4,6 +4,8 @@
  * Custom sniff that finds and removes "use" clauses that are neither used in code nor in
  * documentation.
  *
+ * @since 0.2.0
+ *
  * @license GPL-2.0+
  * @author Thiemo Mättig
  */
