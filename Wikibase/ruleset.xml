@@ -99,5 +99,7 @@
 
 	<arg name="extensions" value="php" />
 	<arg name="encoding" value="utf8" />
+	<exclude-pattern type="relative">^extensions/</exclude-pattern>
+	<exclude-pattern type="relative">^node_modules/</exclude-pattern>
 	<exclude-pattern type="relative">^vendor/</exclude-pattern>
 </ruleset>
