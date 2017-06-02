@@ -9,8 +9,8 @@
 		<exclude name="MediaWiki.WhiteSpace.SpaceBeforeSingleLineComment" />
 	</rule>
 
-	<!-- NOTE: We purposely decided against all Generic.CodeAnalysis.… sniffs, because they all have
-		possible exceptions, and are not meant to block patches from being merged. -->
+	<!-- NOTE: We purposely decided against additional Generic.CodeAnalysis.… sniffs, because they
+		all have possible exceptions, and are not meant to block patches from being merged. -->
 
 	<!-- Enforces to use curly brackets after if ( … ) and other control structures, even if only a
 		single token follows. -->
@@ -53,7 +53,8 @@
 	<rule ref="PSR2.Files" />
 
 	<!-- NOTE: We can not use the Squiz.Arrays.ArrayBracketSpacing sniff because it conflicts with
-		the MediaWiki style that encourages to use spaces inside brackets. -->
+		the MediaWiki style that encourages to use spaces inside brackets, see
+		https://www.mediawiki.org/wiki/Manual:Coding_conventions/JavaScript#Whitespace -->
 
 	<!-- Makes sure self::… is used instead of repeating the class name. -->
 	<rule ref="Squiz.Classes.SelfMemberReference" />
