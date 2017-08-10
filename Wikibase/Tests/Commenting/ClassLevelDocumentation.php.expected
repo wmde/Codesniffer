@@ -1,8 +1,10 @@
- 13 | ERROR | Class level documentation missing
- 19 | ERROR | Class level documentation missing
- 22 | ERROR | Class level documentation missing
- 25 | ERROR | Class level documentation missing
- 28 | ERROR | Class level documentation missing
- 31 | ERROR | Class level documentation missing
- 34 | ERROR | Class level documentation missing
- 38 | ERROR | Class level documentation missing
+ 11 | WARNING | Unexpected whitespace after class level documentation
+ 16 | WARNING | Unexpected whitespace after class level documentation
+ 23 | WARNING | Unexpected whitespace after class level documentation
+ 29 | ERROR   | Regular comment found instead of class level documentation
+ 32 | ERROR   | Class level documentation missing
+ 35 | ERROR   | Class level documentation missing
+ 38 | ERROR   | Class level documentation missing
+ 41 | ERROR   | Class level documentation missing
+ 44 | ERROR   | Class level documentation missing
+ 48 | ERROR   | Class level documentation missing

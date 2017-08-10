@@ -45,12 +45,13 @@ class WikibaseStandardTest extends PHPUnit_Framework_TestCase {
 			'standard' => __DIR__ . '/..',
 			'sniffs' => [ $sniff ],
 			'files' => [ $file ],
+			'reportWidth' => 120,
 		];
 
 		ob_start();
 		$phpcs->process( $options );
 		$actual = ob_get_clean();
-		$actual = preg_replace( '/\A.*--\n(?= )/ms', '', $actual );
+		$actual = preg_replace( '/^.*--\n(?= )/s', '', $actual );
 		$actual = preg_replace( '/^--+\n\n.*/ms', '', $actual );
 
 		$expectedFile = $file . '.expected';

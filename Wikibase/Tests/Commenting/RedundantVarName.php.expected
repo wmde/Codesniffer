@@ -1,0 +1,3 @@
+ 33 | ERROR | Found redundant variable name in @var
+ 38 | ERROR | Found redundant variable name in @var
+ 43 | ERROR | Found redundant variable name in @var

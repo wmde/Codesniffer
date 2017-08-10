@@ -15,9 +15,24 @@ class Wikibase_Sniffs_Commenting_ClassLevelDocumentationSniff implements PHP_Cod
 	}
 
 	public function process( PHP_CodeSniffer_File $phpcsFile, $stackPtr ) {
-		$comment = $phpcsFile->findPrevious( T_DOC_COMMENT_CLOSE_TAG, $stackPtr - 1, $stackPtr - 2 );
+		$tokens = $phpcsFile->getTokens();
+		$previous = $phpcsFile->findPrevious( T_WHITESPACE, $stackPtr - 1, null, true );
 
-		if ( $comment === false ) {
+		if ( $tokens[$previous]['code'] === T_DOC_COMMENT_CLOSE_TAG ) {
+			if ( $previous !== $stackPtr - 2 || $tokens[$stackPtr - 1]['content'] !== "\n" ) {
+				$phpcsFile->addWarning(
+					'Unexpected whitespace after class level documentation',
+					$stackPtr,
+					'Whitespace'
+				);
+			}
+		} elseif ( $tokens[$previous]['code'] === T_COMMENT ) {
+			$phpcsFile->addError(
+				'Regular comment found instead of class level documentation',
+				$stackPtr,
+				'Regular'
+			);
+		} else {
 			$phpcsFile->addError( 'Class level documentation missing', $stackPtr, 'Missing' );
 		}
 	}

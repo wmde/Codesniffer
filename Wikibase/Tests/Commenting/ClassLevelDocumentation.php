@@ -7,6 +7,16 @@ class MyCompliantClass {
 }
 
 /**
+ * Missing newline between comment and class.
+ */class MissingNewline {
+}
+
+/**
+ * Wrong whitespace character between comment and class.
+ */ class WrongWhitespace {
+}
+
+/**
  * To much whitespace between comment and class.
  */
 
