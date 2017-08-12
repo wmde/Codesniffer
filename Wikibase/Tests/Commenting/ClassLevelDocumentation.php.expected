@@ -1,7 +1,7 @@
  11 | WARNING | Unexpected whitespace after class level documentation
  16 | WARNING | Unexpected whitespace after class level documentation
- 23 | WARNING | Unexpected whitespace after class level documentation
- 29 | ERROR   | Regular comment found instead of class level documentation
+ 22 | WARNING | Unexpected whitespace after class level documentation
+ 28 | ERROR   | Regular comment found instead of class level documentation
  32 | ERROR   | Class level documentation missing
  35 | ERROR   | Class level documentation missing
  38 | ERROR   | Class level documentation missing

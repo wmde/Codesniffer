@@ -1,2 +1,2 @@
- 15 | ERROR | Found @returns instead of @return
- 21 | ERROR | Found @returns instead of @return
+ 13 | ERROR | Found @returns instead of @return
+ 19 | ERROR | Found @returns instead of @return

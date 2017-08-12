@@ -11,6 +11,9 @@ use SplFileInfo;
 /**
  * Test runner for custom Wikibase CodeSniffer sniffs. This is copied from the MediaWiki CodeSniffer
  * code repository, but simplified a lot.
+ *
+ * @license GPL-2.0+
+ * @author Thiemo Mättig
  */
 class WikibaseStandardTest extends PHPUnit_Framework_TestCase {
 
@@ -45,12 +48,13 @@ class WikibaseStandardTest extends PHPUnit_Framework_TestCase {
 			'standard' => __DIR__ . '/..',
 			'sniffs' => [ $sniff ],
 			'files' => [ $file ],
-			'reportWidth' => 120,
+			'reportWidth' => 140,
 		];
 
 		ob_start();
 		$phpcs->process( $options );
 		$actual = ob_get_clean();
+
 		$actual = preg_replace( '/^.*--\n(?= )/s', '', $actual );
 		$actual = preg_replace( '/^--+\n\n.*/ms', '', $actual );
 
