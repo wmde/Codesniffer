@@ -28,17 +28,17 @@ class Example {
 	private $not;
 
 	/**
-	 * @Var bool $redundantVariableName
+	 * @Var bool
 	 */
 	private $redundantVariableName;
 
 	/**
-	 * @var bool  $redundantWithComment after the variable name.
+	 * @var bool after the variable name.
 	 */
 	private $redundantWithComment;
 
 	/**
-	 * @var $redundantBeforeType bool
+	 * @var bool
 	 */
 	private $redundantBeforeType;
 

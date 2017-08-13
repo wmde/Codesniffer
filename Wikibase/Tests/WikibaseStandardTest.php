@@ -43,28 +43,53 @@ class WikibaseStandardTest extends PHPUnit_Framework_TestCase {
 	 * @dataProvider provideTestCases
 	 */
 	public function testCodeSnifferStandardFiles( $sniff, $file ) {
-		$phpcs = new PHP_CodeSniffer_CLI();
+		$expectedFile = $file . '.expected';
+		$fixedFile = $file . '.fixed';
+
 		$options = [
 			'standard' => __DIR__ . '/..',
 			'sniffs' => [ $sniff ],
 			'files' => [ $file ],
-			'reportWidth' => 140,
 		];
+		if ( file_exists( $fixedFile ) ) {
+			$options += [
+				'reports' => [ 'cbf' => null ],
+				'phpcbf-suffix' => '.patched',
+			];
+		}
 
-		ob_start();
-		$phpcs->process( $options );
-		$actual = ob_get_clean();
+		$actual = $this->runPhpCs( $options );
 
-		$actual = preg_replace( '/^.*--\n(?= )/s', '', $actual );
-		$actual = preg_replace( '/^--+\n\n.*/ms', '', $actual );
-
-		$expectedFile = $file . '.expected';
 		if ( !file_exists( $expectedFile ) ) {
 			file_put_contents( $expectedFile, $actual );
 		}
 
-		$expected = file_get_contents( $expectedFile );
-		$this->assertSame( $expected, $actual );
+		$this->assertSame( file_get_contents( $expectedFile ), $actual );
+
+		if ( isset( $options['phpcbf-suffix'] ) ) {
+			$patchedFile = $file . $options['phpcbf-suffix'];
+			$this->assertTrue( file_exists( $patchedFile ), 'Expected PHPCBF to apply fixes' );
+			$actual = file_get_contents( $patchedFile );
+			unlink( $patchedFile );
+			$this->assertSame( file_get_contents( $fixedFile ), $actual );
+		}
+	}
+
+	private function runPhpCs( array $options ) {
+		$phpCs = new PHP_CodeSniffer_CLI();
+		$options['reports']['full'] = null;
+		$options['reportWidth'] = 140;
+
+		ob_start();
+		$phpCs->process( $options );
+		$output = ob_get_clean();
+
+		// Remove header
+		$output = preg_replace( '/^.*--\n(?= )/s', '', $output );
+		// Remove footer, identified by a dashed line followed by a PHPCBF report or empty line
+		$output = preg_replace( '/^--+\n(PHPCBF|\n).*/ms', '', $output );
+
+		return $output;
 	}
 
 }

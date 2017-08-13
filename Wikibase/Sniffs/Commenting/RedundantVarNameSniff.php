@@ -1,8 +1,8 @@
 <?php
 
 /**
- * Custom sniff that checks if the "@var" documentation of a class property repeats the variable
- * name, which is unnecessary.
+ * Custom sniff that reports and repairs "@var" documentations of class properties that repeat the
+ * variable name, which is unnecessary.
  *
  * @license GPL-2.0+
  * @author Thiemo Mättig
@@ -20,11 +20,15 @@ class Wikibase_Sniffs_Commenting_RedundantVarNameSniff implements PHP_CodeSniffe
 			return;
 		}
 
-		$variablePtr = $phpcsFile->findNext( T_VARIABLE, $stackPtr + 1 );
-		if ( $variablePtr === false ) {
+		$docPtr = $phpcsFile->findNext( T_DOC_COMMENT_WHITESPACE, $stackPtr + 1, null, true );
+		if ( !$docPtr || $tokens[$docPtr]['code'] !== T_DOC_COMMENT_STRING ) {
 			return;
 		}
-		$variableName = $tokens[$variablePtr]['content'];
+
+		$variablePtr = $phpcsFile->findNext( T_VARIABLE, $stackPtr + 1 );
+		if ( !$variablePtr ) {
+			return;
+		}
 
 		$visibilityPtr = $phpcsFile->findPrevious(
 			T_WHITESPACE,
@@ -36,25 +40,20 @@ class Wikibase_Sniffs_Commenting_RedundantVarNameSniff implements PHP_CodeSniffe
 			return;
 		}
 
-		$stringPtr = $phpcsFile->findNext(
-			T_DOC_COMMENT_WHITESPACE,
-			$stackPtr + 1,
-			$visibilityPtr - 1,
-			true
-		);
+		$variableName = $tokens[$variablePtr]['content'];
 
-		if ( $stringPtr !== false
-			&& $tokens[$stringPtr]['code'] === T_DOC_COMMENT_STRING
-			&& preg_match(
-				'/^(\S+\s+)?' . preg_quote( $variableName, '/' ) . '\b/is',
-				$tokens[$stringPtr]['content']
+		if ( preg_match(
+				'/^(\S+\s)?\s*' . preg_quote( $variableName, '/' ) . '\b\s*(.*)/is',
+				$tokens[$docPtr]['content'],
+				$matches
+			)
+			&& $phpcsFile->addFixableError(
+				'Found redundant variable name in @var',
+				$docPtr,
+				'Found'
 			)
 		) {
-			$phpcsFile->addError(
-				'Found redundant variable name in @var',
-				$stringPtr,
-				'Redundant'
-			);
+			$phpcsFile->fixer->replaceToken( $docPtr, trim( $matches[1] . $matches[2] ) );
 		}
 	}
 
