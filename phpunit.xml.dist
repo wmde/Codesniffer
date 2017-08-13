@@ -1,0 +1,11 @@
+<phpunit bootstrap="./phpunit.bootstrap.php"
+		colors="true"
+		convertErrorsToExceptions="true"
+		convertNoticesToExceptions="true"
+		convertWarningsToExceptions="true">
+	<testsuites>
+		<testsuite name="WikibaseCodeSniffer">
+			<file>./Wikibase/Tests/WikibaseStandardTest.php</file>
+		</testsuite>
+	</testsuites>
+</phpunit>
