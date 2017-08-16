@@ -1,0 +1,16 @@
+ 24 | ERROR | [x] Found @cover instead of @covers
+ 25 | ERROR | [x] Found @inheritdoc instead of @inheritDoc
+ 26 | ERROR | [x] Found @licence instead of @license
+ 27 | ERROR | [x] Found @params instead of @param
+ 29 | ERROR | [x] Found @returns instead of @return
+ 30 | ERROR | [x] Found @throw instead of @throws
+ 31 | ERROR | [x] Found @type instead of @var
+ 32 | ERROR | [x] Found @use instead of @uses
+ 39 | ERROR | [x] Found @Cover instead of @covers
+ 40 | ERROR | [x] Found @Inheritdoc instead of @inheritDoc
+ 41 | ERROR | [x] Found @Licence instead of @license
+ 42 | ERROR | [x] Found @Params instead of @param
+ 44 | ERROR | [x] Found @Returns instead of @return
+ 45 | ERROR | [x] Found @Throw instead of @throws
+ 46 | ERROR | [x] Found @Type instead of @var
+ 47 | ERROR | [x] Found @Use instead of @uses
