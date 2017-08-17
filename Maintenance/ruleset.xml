@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<ruleset name="Maintenance">
+	<arg name="extensions" value="php" />
+	<arg name="encoding" value="UTF-8" />
+	<exclude-pattern type="relative">^extensions/</exclude-pattern>
+	<exclude-pattern type="relative">^node_modules/</exclude-pattern>
+	<exclude-pattern type="relative">^vendor/</exclude-pattern>
+</ruleset>

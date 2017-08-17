@@ -7,7 +7,7 @@
  * @license GPL-2.0+
  * @author Thiemo Mättig
  */
-class Wikibase_Sniffs_Commenting_ClassLevelDocumentationSniff implements PHP_CodeSniffer_Sniff {
+class Maintenance_Sniffs_Commenting_ClassLevelDocumentationSniff implements PHP_CodeSniffer_Sniff {
 
 	public function register() {
 		return [

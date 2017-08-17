@@ -15,7 +15,7 @@ use SplFileInfo;
  * @license GPL-2.0+
  * @author Thiemo Mättig
  */
-class WikibaseStandardTest extends PHPUnit_Framework_TestCase {
+class CustomSniffsTest extends PHPUnit_Framework_TestCase {
 
 	public static function provideTestCases() {
 		$tests = [];
@@ -31,9 +31,14 @@ class WikibaseStandardTest extends PHPUnit_Framework_TestCase {
 			}
 
 			$shortName = $file->getBasename( '.' . $file->getExtension() );
-			$sniff = 'Wikibase.' . basename( $file->getPath() ) . '.' . $shortName;
+			$standard = basename( dirname( $file->getPath() ) );
+			$sniff = $standard . '.' . basename( $file->getPath() ) . '.' . $shortName;
 
-			$tests[$shortName] = [ $sniff, $file->getPathname() ];
+			$tests[$shortName] = [
+				dirname( __DIR__ ) . DIRECTORY_SEPARATOR . $standard,
+				$sniff,
+				$file->getPathname()
+			];
 		}
 
 		return $tests;
@@ -42,10 +47,10 @@ class WikibaseStandardTest extends PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider provideTestCases
 	 */
-	public function testCodeSnifferStandardFiles( $sniff, $file ) {
+	public function testCodeSnifferStandardFiles( $standard, $sniff, $file ) {
 		$phpcs = new PHP_CodeSniffer_CLI();
 		$options = [
-			'standard' => __DIR__ . '/..',
+			'standard' => $standard,
 			'sniffs' => [ $sniff ],
 			'files' => [ $file ],
 			'reportWidth' => 140,
