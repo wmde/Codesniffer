@@ -25,11 +25,10 @@ abstract class DocumentedAbstractClass {
 /**
  * To much whitespace between comment and class.
  */
-
 abstract class ToManyNewlines {
 }
 
-/*
+/**
  * This is not a PHPDoc comment but can be turned into one.
  */
 class NotAPhpDocComment {
@@ -56,7 +55,6 @@ namespace UndocumentedNamespace {
 	/** Doc */class MissingNewlineInNamespace {
 	}
 	/** Doc */
-
 	class ToManyNewlinesInNamespace {
 	}
 	/** Doc */
