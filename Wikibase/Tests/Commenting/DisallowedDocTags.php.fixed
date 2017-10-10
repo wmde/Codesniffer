@@ -1,0 +1,65 @@
+<?php
+
+function noDocComment() {
+}
+
+/**
+ * These are all fine.
+ * @covers
+ * @fixme
+ * @inheritDoc
+ * @license
+ * @param
+ * @return
+ * @throws
+ * @var
+ * @todo
+ * @uses
+ */
+function validTags() {
+}
+
+/**
+ * These should all be reported.
+ * @covers
+ * @inheritDoc
+ * @license
+ * @param
+ * @property
+ * @return
+ * @throws
+ * @var
+ * @uses
+ */
+function lowerCaseTags() {
+}
+
+/**
+ * Reporting should be case-insensitive for all-lowercase search patterns.
+ * @covers
+ * @inheritDoc
+ * @license
+ * @param
+ * @Property
+ * @return
+ * @throws
+ * @var
+ * @uses
+ */
+function upperCaseTags() {
+}
+
+/*
+ * This is not a PHPDoc comment and should be ignored.
+ * @cover
+ * @inheritdoc
+ * @licence
+ * @params
+ * @property
+ * @returns
+ * @throw
+ * @type
+ * @use
+ */
+function notADocComment() {
+}
