@@ -4,6 +4,8 @@
  * Custom sniff that checks and removes unnecessary "use" clauses that are in the same namespace as
  * the rest of the code.
  *
+ * @since 0.2.0
+ *
  * @license GPL-2.0+
  * @author Thiemo Mättig
  */

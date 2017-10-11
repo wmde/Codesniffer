@@ -4,6 +4,27 @@
 		https://github.com/wikimedia/mediawiki-tools-codesniffer/blob/master/MediaWiki/ruleset.xml
 		-->
 	<rule ref="./vendor/mediawiki/mediawiki-codesniffer/MediaWiki">
+		<!-- The function comment sniff is way to rigorous about way to many details that need
+			exceptions:
+			* It complains when "@param <type> $<var>" is not followed by a comment, even if type
+			  and variable name are fully self-explanatory. We do have 3000+ of these in the
+			  Wikibase code base.
+			* It complains about missing documentation on fully self-explanatory function headers
+			  with strict type hints.
+			* It complains about missing documentation if there is a proper @see tag.
+			* It complains about duplicate spaces in "@param <type>  $<var>", but removing these
+			  doesn't make the code easier to read.
+			* It does not understand "@param <type> [$optional,…]. -->
+		<exclude name="MediaWiki.Commenting.FunctionComment" />
+
+		<!-- We disagree with the idea of certain characters making comments "illegal" and blocking
+			patches from being merged. This behaves especially bad on commented out code. -->
+		<exclude name="MediaWiki.Commenting.IllegalSingleLineComment" />
+
+		<!-- Starting a function's body with an empty line can be helpful after a very large header.
+			The code is not guaranteed to be easier to read if this is disallowed. -->
+		<exclude name="MediaWiki.WhiteSpace.DisallowEmptyLineFunctions" />
+
 		<!-- Even if we encourage to use spaces in comments, we don't think this sniff should block
 			patches from being merged. -->
 		<exclude name="MediaWiki.WhiteSpace.SpaceBeforeSingleLineComment" />
@@ -11,10 +32,6 @@
 
 	<!-- NOTE: We purposely decided against additional Generic.CodeAnalysis.… sniffs, because they
 		all have possible exceptions, and are not meant to block patches from being merged. -->
-
-	<!-- Enforces to use curly brackets after if ( … ) and other control structures, even if only a
-		single token follows. -->
-	<rule ref="Generic.ControlStructures" />
 
 	<!-- Disallows any content outside of <?php … ?> tags. -->
 	<rule ref="Generic.Files.InlineHTML" />
@@ -37,6 +54,11 @@
 
 	<rule ref="Generic.PHP.CharacterBeforePHPOpeningTag" />
 
+	<rule ref="MediaWiki.NamingConventions.LowerCamelFunctionsName">
+		<!-- Exclude test methods like "testGivenInvalidInput_methodThrowsException". -->
+		<exclude-pattern>tests*Test*\.php</exclude-pattern>
+	</rule>
+
 	<!-- See http://www.php-fig.org/psr/psr-1/ -->
 	<rule ref="PSR1">
 		<!-- Entry points typically have side effects, which is why this sniff is a "should" and not
@@ -48,7 +70,7 @@
 		<exclude-pattern>tests*Test*\.php</exclude-pattern>
 	</rule>
 
-	<!-- Enforces a single blank line at the end of the file. See
+	<!-- Disallows ?> and enforces a single blank line at the end of the file. See
 		http://www.php-fig.org/psr/psr-2/#files -->
 	<rule ref="PSR2.Files" />
 
@@ -75,9 +97,6 @@
 	<!-- NOTE: Do not add the Squiz.Strings.DoubleQuoteUsage sniff. Even if we encourage to prefer
 		single quotes, we don't think double quotes should block patches from being merged. -->
 
-	<!-- Disallows spaces in ( int )$var type casts. -->
-	<rule ref="Squiz.WhiteSpace.CastSpacing" />
-
 	<!-- Enforces one empty line before and after each method in a class. -->
 	<rule ref="Squiz.WhiteSpace.FunctionSpacing">
 		<properties>
@@ -85,6 +104,9 @@
 			<property name="spacing" value="1" />
 		</properties>
 	</rule>
+
+	<!-- Disallows the use of AND and OR in favor of && and ||. -->
+	<rule ref="Squiz.Operators.ValidLogicalOperators" />
 
 	<!-- Makes sure operators are surrounded by spaces. This includes comparisons, assignments, and
 		calculations like 1 / 60. -->

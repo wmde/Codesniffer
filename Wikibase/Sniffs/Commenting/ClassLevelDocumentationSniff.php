@@ -5,6 +5,8 @@
  * non-empty documentation comment. Comments with empty PHPDoc tags like "@inheritDoc" are still
  * considered empty.
  *
+ * @since 0.2.0
+ *
  * @license GPL-2.0+
  * @author Thiemo Mättig
  */

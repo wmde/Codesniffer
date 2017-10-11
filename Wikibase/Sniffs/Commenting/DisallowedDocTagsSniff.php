@@ -4,6 +4,8 @@
  * Custom sniff that reports deprecated PHPDoc tags (e.g. known misspellings) and replaces them with
  * their preferred counterparts.
  *
+ * @since 0.2.0
+ *
  * @license GPL-2.0+
  * @author Thiemo Mättig
  */

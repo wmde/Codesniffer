@@ -4,6 +4,8 @@
  * Custom sniff that reports and repairs "@var" documentations of class properties that repeat the
  * variable name, which is unnecessary.
  *
+ * @since 0.2.0
+ *
  * @license GPL-2.0+
  * @author Thiemo Mättig
  */
