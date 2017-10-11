@@ -1,4 +1,4 @@
-  7 | ERROR | [x] Unnecessary import identical to namespace
- 11 | ERROR | [x] Unnecessary import identical to namespace
- 13 | ERROR | [x] Unnecessary import identical to namespace
- 15 | ERROR | [x] Unnecessary import identical to namespace
+  7 | ERROR | [x] Unnecessary import of "Unnecessary1" from own namespace
+ 11 | ERROR | [x] Unnecessary import of "Unnecessary2" from own namespace
+ 13 | ERROR | [x] Unnecessary import of "Unnecessary3" from own namespace
+ 15 | ERROR | [x] Unnecessary import of "Unnecessary4" from own namespace

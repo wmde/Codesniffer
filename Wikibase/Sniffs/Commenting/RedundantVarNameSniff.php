@@ -50,7 +50,7 @@ class Wikibase_Sniffs_Commenting_RedundantVarNameSniff implements PHP_CodeSniffe
 				$matches
 			)
 			&& $phpcsFile->addFixableError(
-				'Found redundant variable name in @var',
+				"Found redundant variable name \"$variableName\" in @var",
 				$docPtr,
 				'Found'
 			)

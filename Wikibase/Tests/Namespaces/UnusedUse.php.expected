@@ -1,4 +1,4 @@
-  3 | ERROR | [x] Unused import found
-  6 | ERROR | [x] Unused import found
-  8 | ERROR | [x] Unused import found
- 12 | ERROR | [x] Unused import found
+  3 | ERROR | [x] Unused import of "Unused" found
+  6 | ERROR | [x] Unused import of "UnusedMain" found
+  8 | ERROR | [x] Unused import of "AnotherUnusedMain" found
+ 12 | ERROR | [x] Unused import of "MentionedInComment" found

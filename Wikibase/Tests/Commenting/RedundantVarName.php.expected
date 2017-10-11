@@ -1,3 +1,3 @@
- 31 | ERROR | [x] Found redundant variable name in @var
- 36 | ERROR | [x] Found redundant variable name in @var
- 41 | ERROR | [x] Found redundant variable name in @var
+ 31 | ERROR | [x] Found redundant variable name "$redundantVariableName" in @var
+ 36 | ERROR | [x] Found redundant variable name "$redundantWithComment" in @var
+ 41 | ERROR | [x] Found redundant variable name "$redundantBeforeType" in @var
