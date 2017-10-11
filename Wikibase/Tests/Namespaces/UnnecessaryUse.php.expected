@@ -1,0 +1,4 @@
+  7 | ERROR | [x] Unnecessary import identical to namespace
+ 11 | ERROR | [x] Unnecessary import identical to namespace
+ 13 | ERROR | [x] Unnecessary import identical to namespace
+ 15 | ERROR | [x] Unnecessary import identical to namespace
