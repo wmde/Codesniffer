@@ -1,0 +1,4 @@
+  4 | ERROR | Found slow in_array( array_keys ), should be array_key_exists or isset
+  5 | ERROR | Found slow in_array( array_flip ), should be array_key_exists or isset
+  6 | ERROR | Found slow in_array( array_keys ), should be array_key_exists or isset
+ 16 | ERROR | Found slow in_array( array_keys ), should be array_key_exists or isset
