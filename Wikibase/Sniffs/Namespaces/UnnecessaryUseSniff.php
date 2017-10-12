@@ -54,8 +54,9 @@ class Wikibase_Sniffs_Namespaces_UnnecessaryUseSniff implements PHP_CodeSniffer_
 			}
 		}
 
+		$className = $tokens[$expectedUseEnd - 1]['content'];
 		if ( !$phpcsFile->addFixableError(
-			'Unnecessary import identical to namespace',
+			"Unnecessary import of \"$className\" from own namespace",
 			$stackPtr,
 			'Found'
 		)

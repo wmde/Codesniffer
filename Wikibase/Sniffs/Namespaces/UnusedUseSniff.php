@@ -51,7 +51,11 @@ class Wikibase_Sniffs_Namespaces_UnusedUseSniff implements PHP_CodeSniffer_Sniff
 			}
 		}
 
-		if ( !$phpcsFile->addFixableError( 'Unused import found', $stackPtr, 'Found' ) ) {
+		if ( !$phpcsFile->addFixableError(
+			"Unused import of \"$className\" found",
+			$stackPtr,
+			'Found'
+		) ) {
 			return;
 		}
 
