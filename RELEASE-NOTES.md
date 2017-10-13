@@ -1,6 +1,6 @@
 # Wikibase CodeSniffer standards changelog
 
-## 0.2.0 (2017-10-11)
+## 0.2.0 (2017-10-13)
 
 * Added custom sniffs:
 	* `Wikibase.Commenting.ClassLevelDocumentation`
