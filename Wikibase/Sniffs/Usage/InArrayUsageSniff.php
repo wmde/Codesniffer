@@ -7,7 +7,7 @@
  * @since 0.2.0
  *
  * @license GPL-2.0+
- * @author Thiemo Mättig
+ * @author Thiemo Kreuz
  */
 class Wikibase_Sniffs_Usage_InArrayUsageSniff implements PHP_CodeSniffer_Sniff {
 
