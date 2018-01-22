@@ -49,10 +49,6 @@
 		<exclude-pattern>\.i18n\.magic\.php</exclude-pattern>
 	</rule>
 
-	<rule ref="Generic.Files.OneClassPerFile" />
-	<rule ref="Generic.Files.OneInterfacePerFile" />
-	<rule ref="Generic.Files.OneTraitPerFile" />
-
 	<!-- NOTE: Never add the Generic.Metrics.… sniffs to this generic rule set, because these are
 		not about "code style", and the exact limits are highly disputable. -->
 
