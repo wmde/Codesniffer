@@ -79,9 +79,6 @@
 		the MediaWiki style that encourages to use spaces inside brackets, see
 		https://www.mediawiki.org/wiki/Manual:Coding_conventions/JavaScript#Whitespace -->
 
-	<!-- Makes sure self::… is used instead of repeating the class name. -->
-	<rule ref="Squiz.Classes.SelfMemberReference" />
-
 	<!-- Makes sure control structures like if ( … ), for ( …; …; … ) etc. properly use spaces. -->
 	<rule ref="Squiz.ControlStructures.ControlSignature" />
 
@@ -117,8 +114,5 @@
 
 	<arg name="extensions" value="php" />
 	<arg name="encoding" value="UTF-8" />
-	<exclude-pattern type="relative">^\.git</exclude-pattern>
 	<exclude-pattern type="relative">^extensions/</exclude-pattern>
-	<exclude-pattern type="relative">^node_modules/</exclude-pattern>
-	<exclude-pattern type="relative">^vendor/</exclude-pattern>
 </ruleset>

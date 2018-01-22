@@ -1,5 +1,13 @@
 # Wikibase CodeSniffer standards changelog
 
+## 0.3.0 (dev)
+
+* Updated the base MediaWiki rule set from 0.8 to 0.10.1. This adds the following sniffs:
+	* `Generic.PHP.BacktickOperator`
+	* `MediaWiki.AlternativeSyntax.PHP7UnicodeSyntax`
+	* `MediaWiki.AlternativeSyntax.ShortCastSyntax`
+	* `MediaWiki.Usage.ReferenceThis`
+
 ## 0.2.0 (2017-10-13)
 
 * Added custom sniffs:
