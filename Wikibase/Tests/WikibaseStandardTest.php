@@ -2,7 +2,11 @@
 
 namespace Wikibase\CodeSniffer\Tests;
 
-use PHP_CodeSniffer_CLI;
+use PHP_CodeSniffer\Config;
+use PHP_CodeSniffer\Files\DummyFile;
+use PHP_CodeSniffer\Files\File;
+use PHP_CodeSniffer\Reporter;
+use PHP_CodeSniffer\Ruleset;
 use PHPUnit_Framework_TestCase;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
@@ -46,19 +50,13 @@ class WikibaseStandardTest extends PHPUnit_Framework_TestCase {
 		$expectedFile = $file . '.expected';
 		$fixedFile = $file . '.fixed';
 
-		$options = [
-			'standard' => __DIR__ . '/..',
-			'sniffs' => [ $sniff ],
-			'files' => [ $file ],
-		];
-		if ( file_exists( $fixedFile ) ) {
-			$options += [
-				'reports' => [ 'cbf' => null ],
-				'phpcbf-suffix' => '.patched',
-			];
-		}
+		$config = new Config();
+		$config->standards = [ __DIR__ . '/..' ];
+		$config->sniffs = [ $sniff ];
 
-		$actual = $this->runPhpCs( $options );
+		$phpCsFile = new DummyFile( file_get_contents( $file ), new Ruleset( $config ), $config );
+		$phpCsFile->process();
+		$actual = $this->getPhpCbfReport( $phpCsFile );
 
 		if ( !file_exists( $expectedFile ) ) {
 			file_put_contents( $expectedFile, $actual );
@@ -66,22 +64,24 @@ class WikibaseStandardTest extends PHPUnit_Framework_TestCase {
 
 		$this->assertSame( file_get_contents( $expectedFile ), $actual );
 
-		if ( isset( $options['phpcbf-suffix'] ) ) {
-			$patchedFile = $file . $options['phpcbf-suffix'];
-			$this->assertTrue( file_exists( $patchedFile ), 'Expected PHPCBF to apply fixes' );
-			$actual = file_get_contents( $patchedFile );
-			unlink( $patchedFile );
+		if ( file_exists( $fixedFile ) ) {
+			$phpCsFile->fixer->fixFile();
+			$actual = $phpCsFile->fixer->getContents();
 			$this->assertSame( file_get_contents( $fixedFile ), $actual );
 		}
 	}
 
-	private function runPhpCs( array $options ) {
-		$phpCs = new PHP_CodeSniffer_CLI();
-		$options['reports']['full'] = null;
-		$options['reportWidth'] = 140;
+	/**
+	 * @param File $phpCsFile
+	 *
+	 * @return string
+	 */
+	private function getPhpCbfReport( File $phpCsFile ) {
+		$reporter = new Reporter( $phpCsFile->config );
+		$reporter->cacheFileReport( $phpCsFile );
 
 		ob_start();
-		$phpCs->process( $options );
+		$reporter->printReport( 'full' );
 		$output = ob_get_clean();
 
 		// Remove header

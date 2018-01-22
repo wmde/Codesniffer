@@ -1,5 +1,10 @@
 <?php
 
+namespace Wikibase\Sniffs\Commenting;
+
+use PHP_CodeSniffer\Files\File;
+use PHP_CodeSniffer\Sniffs\Sniff;
+
 /**
  * Custom sniff that reports classes, interfaces, and traits that are not directly preceded by a
  * non-empty documentation comment. Comments with empty PHPDoc tags like "@inheritDoc" are still
@@ -10,7 +15,7 @@
  * @license GPL-2.0+
  * @author Thiemo Kreuz
  */
-class Wikibase_Sniffs_Commenting_ClassLevelDocumentationSniff implements PHP_CodeSniffer_Sniff {
+class ClassLevelDocumentationSniff implements Sniff {
 
 	public function register() {
 		return [
@@ -20,7 +25,7 @@ class Wikibase_Sniffs_Commenting_ClassLevelDocumentationSniff implements PHP_Cod
 		];
 	}
 
-	public function process( PHP_CodeSniffer_File $phpcsFile, $stackPtr ) {
+	public function process( File $phpcsFile, $stackPtr ) {
 		$tokens = $phpcsFile->getTokens();
 		$previous = $phpcsFile->findPrevious( [
 			T_ABSTRACT,

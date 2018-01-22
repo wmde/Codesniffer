@@ -1,5 +1,10 @@
 <?php
 
+namespace Wikibase\Sniffs\Namespaces;
+
+use PHP_CodeSniffer\Files\File;
+use PHP_CodeSniffer\Sniffs\Sniff;
+
 /**
  * Custom sniff that finds and removes "use" clauses that are neither used in code nor in
  * documentation.
@@ -9,13 +14,13 @@
  * @license GPL-2.0+
  * @author Thiemo Kreuz
  */
-class Wikibase_Sniffs_Namespaces_UnusedUseSniff implements PHP_CodeSniffer_Sniff {
+class UnusedUseSniff implements Sniff {
 
 	public function register() {
 		return [ T_USE ];
 	}
 
-	public function process( PHP_CodeSniffer_File $phpcsFile, $stackPtr ) {
+	public function process( File $phpcsFile, $stackPtr ) {
 		$tokens = $phpcsFile->getTokens();
 
 		// Shorten out if not on the top level, required to properly detect the use of traits

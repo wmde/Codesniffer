@@ -1,5 +1,10 @@
 <?php
 
+namespace Wikibase\Sniffs\Namespaces;
+
+use PHP_CodeSniffer\Files\File;
+use PHP_CodeSniffer\Sniffs\Sniff;
+
 /**
  * Custom sniff that checks and removes unnecessary "use" clauses that are in the same namespace as
  * the rest of the code.
@@ -9,13 +14,13 @@
  * @license GPL-2.0+
  * @author Thiemo Kreuz
  */
-class Wikibase_Sniffs_Namespaces_UnnecessaryUseSniff implements PHP_CodeSniffer_Sniff {
+class UnnecessaryUseSniff implements Sniff {
 
 	public function register() {
 		return [ T_USE ];
 	}
 
-	public function process( PHP_CodeSniffer_File $phpcsFile, $stackPtr ) {
+	public function process( File $phpcsFile, $stackPtr ) {
 		$tokens = $phpcsFile->getTokens();
 
 		$nsPtr = $phpcsFile->findPrevious( T_NAMESPACE, $stackPtr - 1 );

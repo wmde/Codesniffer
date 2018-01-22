@@ -1,5 +1,10 @@
 <?php
 
+namespace Wikibase\Sniffs\Usage;
+
+use PHP_CodeSniffer\Files\File;
+use PHP_CodeSniffer\Sniffs\Sniff;
+
 /**
  * Custom sniff that finds unnecessary slow in_array() that can be replaced with array_key_exists()
  * or isset().
@@ -9,13 +14,13 @@
  * @license GPL-2.0+
  * @author Thiemo Kreuz
  */
-class Wikibase_Sniffs_Usage_InArrayUsageSniff implements PHP_CodeSniffer_Sniff {
+class InArrayUsageSniff implements Sniff {
 
 	public function register() {
 		return [ T_STRING ];
 	}
 
-	public function process( PHP_CodeSniffer_File $phpcsFile, $stackPtr ) {
+	public function process( File $phpcsFile, $stackPtr ) {
 		$tokens = $phpcsFile->getTokens();
 
 		if ( strcasecmp( $tokens[$stackPtr]['content'], 'array_flip' ) !== 0

@@ -1,5 +1,10 @@
 <?php
 
+namespace Wikibase\Sniffs\Commenting;
+
+use PHP_CodeSniffer\Files\File;
+use PHP_CodeSniffer\Sniffs\Sniff;
+
 /**
  * Custom sniff that reports deprecated PHPDoc tags (e.g. known misspellings) and replaces them with
  * their preferred counterparts.
@@ -9,7 +14,7 @@
  * @license GPL-2.0+
  * @author Thiemo Kreuz
  */
-class Wikibase_Sniffs_Commenting_DisallowedDocTagsSniff implements PHP_CodeSniffer_Sniff {
+class DisallowedDocTagsSniff implements Sniff {
 
 	/**
 	 * @var array Array mapping deprecated to preferred PHPDoc tags. If an array key is all
@@ -38,7 +43,7 @@ class Wikibase_Sniffs_Commenting_DisallowedDocTagsSniff implements PHP_CodeSniff
 		return [ T_DOC_COMMENT_TAG ];
 	}
 
-	public function process( PHP_CodeSniffer_File $phpcsFile, $stackPtr ) {
+	public function process( File $phpcsFile, $stackPtr ) {
 		$tag = $phpcsFile->getTokensAsString( $stackPtr, 1 );
 		$replacement = false;
 

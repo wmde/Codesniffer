@@ -1,5 +1,10 @@
 <?php
 
+namespace Wikibase\Sniffs\Commenting;
+
+use PHP_CodeSniffer\Files\File;
+use PHP_CodeSniffer\Sniffs\Sniff;
+
 /**
  * Custom sniff that reports and repairs "@var" documentations of class properties that repeat the
  * variable name, which is unnecessary.
@@ -9,13 +14,13 @@
  * @license GPL-2.0+
  * @author Thiemo Kreuz
  */
-class Wikibase_Sniffs_Commenting_RedundantVarNameSniff implements PHP_CodeSniffer_Sniff {
+class RedundantVarNameSniff implements Sniff {
 
 	public function register() {
 		return [ T_DOC_COMMENT_TAG ];
 	}
 
-	public function process( PHP_CodeSniffer_File $phpcsFile, $stackPtr ) {
+	public function process( File $phpcsFile, $stackPtr ) {
 		$tokens = $phpcsFile->getTokens();
 
 		if ( strtolower( $tokens[$stackPtr]['content'] ) !== '@var' ) {
