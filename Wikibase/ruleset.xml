@@ -103,15 +103,6 @@
 		</properties>
 	</rule>
 
-	<!-- Makes sure operators are surrounded by spaces. This includes comparisons, assignments, and
-		calculations like 1 / 60. -->
-	<rule ref="Squiz.WhiteSpace.OperatorSpacing">
-		<properties>
-			<!-- But we need to allow splitting long lines. -->
-			<property name="ignoreNewlines" value="true" />
-		</properties>
-	</rule>
-
 	<arg name="extensions" value="php" />
 	<arg name="encoding" value="UTF-8" />
 	<exclude-pattern type="relative">^extensions/</exclude-pattern>
