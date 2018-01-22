@@ -4,6 +4,9 @@
 		https://github.com/wikimedia/mediawiki-tools-codesniffer/blob/master/MediaWiki/ruleset.xml
 		-->
 	<rule ref="./vendor/mediawiki/mediawiki-codesniffer/MediaWiki">
+		<!-- Temporarily disabled, might replace Wikibase.Namespaces.UnusedUse. -->
+		<exclude name="MediaWiki.Classes.UnusedUseStatement" />
+
 		<!-- The function comment sniff is way to rigorous about way to many details that need
 			exceptions:
 			* It complains when "@param <type> $<var>" is not followed by a comment, even if type
