@@ -32,6 +32,9 @@ class Wikibase_Sniffs_Commenting_DisallowedDocTagsSniff implements PHP_CodeSniff
 		// https://phpunit.de/manual/current/en/appendixes.annotations.html#appendixes.annotations.covers
 		'@cover' => '@covers',
 		'@use' => '@uses',
+
+		// https://github.com/slevomat/coding-standard#slevomatcodingstandardcommentingforbiddenannotations-
+		'@package' => null,
 	];
 
 	public function register() {
