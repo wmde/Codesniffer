@@ -36,12 +36,12 @@ class Example implements UsedMain {
 	/**
 	 * @var UsedAndCommented with a comment
 	 */
-	private $prop;
+	private $prop2;
 
 	/**
 	 * @var UsedButBadCapiTaliZation
 	 */
-	private $prop;
+	private $prop3;
 
 	/**
 	 * @expectedException UsedExpectedException
