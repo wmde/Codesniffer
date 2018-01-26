@@ -18,12 +18,16 @@
 		<exclude name="MediaWiki.Commenting.FunctionComment" />
 
 		<!-- We disagree with the idea of certain characters making comments "illegal" and blocking
-			patches from being merged. This behaves especially bad on commented out code. -->
+			patches from being merged. This behaves especially bad on code examples. -->
 		<exclude name="MediaWiki.Commenting.IllegalSingleLineComment" />
 
 		<!-- Starting a function's body with an empty line can be helpful after a very large header.
 			The code is not guaranteed to be easier to read if this is disallowed. -->
 		<exclude name="MediaWiki.WhiteSpace.DisallowEmptyLineFunctions" />
+
+		<!-- Even if we encourage to use a space in "function ()", we don't think this sniff should
+			block patches from being merged. -->
+		<exclude name="MediaWiki.WhiteSpace.SpaceAfterClosure" />
 
 		<!-- Even if we encourage to use spaces in comments, we don't think this sniff should block
 			patches from being merged. -->
@@ -52,8 +56,6 @@
 	<!-- NOTE: Never add the Generic.Metrics.… sniffs to this generic rule set, because these are
 		not about "code style", and the exact limits are highly disputable. -->
 
-	<rule ref="Generic.PHP.CharacterBeforePHPOpeningTag" />
-
 	<rule ref="MediaWiki.NamingConventions.LowerCamelFunctionsName">
 		<!-- Exclude test methods like "testGivenInvalidInput_methodThrowsException". -->
 		<exclude-pattern>tests*Test*\.php</exclude-pattern>
@@ -70,9 +72,8 @@
 		<exclude-pattern>tests*Test*\.php</exclude-pattern>
 	</rule>
 
-	<!-- Disallows ?> and enforces a single blank line at the end of the file. See
-		http://www.php-fig.org/psr/psr-2/#files -->
-	<rule ref="PSR2.Files" />
+	<!-- Disallows ?>. See http://www.php-fig.org/psr/psr-2/#files -->
+	<rule ref="PSR2.Files.ClosingTag" />
 
 	<!-- NOTE: We can not use the Squiz.Arrays.ArrayBracketSpacing sniff because it conflicts with
 		the MediaWiki style that encourages to use spaces inside brackets, see
@@ -104,9 +105,6 @@
 			<property name="spacing" value="1" />
 		</properties>
 	</rule>
-
-	<!-- Disallows the use of AND and OR in favor of && and ||. -->
-	<rule ref="Squiz.Operators.ValidLogicalOperators" />
 
 	<!-- Makes sure operators are surrounded by spaces. This includes comparisons, assignments, and
 		calculations like 1 / 60. -->
