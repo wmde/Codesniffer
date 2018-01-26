@@ -1,5 +1,20 @@
 # Wikibase CodeSniffer standards changelog
 
+## 0.3.0 (dev)
+
+* Updated the base MediaWiki rule set from 0.8 to 13.0.0. This adds the following sniffs:
+	* `Generic.PHP.BacktickOperator`
+	* `MediaWiki.AlternativeSyntax.LeadingZeroInFloat`
+	* `MediaWiki.AlternativeSyntax.PHP7UnicodeSyntax`
+	* `MediaWiki.AlternativeSyntax.ShortCastSyntax`
+	* `MediaWiki.Files.ClassMatchesFilename`
+	* `MediaWiki.Files.OneClassPerFile`
+	* `MediaWiki.Usage.DeprecatedConstantUsage`
+	* `MediaWiki.Usage.ReferenceThis`
+	* `MediaWiki.Usage.ScalarTypeHintUsage`
+	* `MediaWiki.VariableAnalysis.ForbiddenGlobalVariables`
+	* `MediaWiki.WhiteSpace.OpeningKeywordParenthesis`
+
 ## 0.2.0 (2017-10-13)
 
 * Added custom sniffs:
