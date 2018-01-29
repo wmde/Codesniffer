@@ -4,7 +4,8 @@
 		https://github.com/wikimedia/mediawiki-tools-codesniffer/blob/master/MediaWiki/ruleset.xml
 		-->
 	<rule ref="./vendor/mediawiki/mediawiki-codesniffer/MediaWiki">
-		<!-- Temporarily disabled, might replace Wikibase.Namespaces.UnusedUse. -->
+		<!-- Currently cannot replace Wikibase.Namespaces.UnusedUse because it does not understand
+			/* @var … */ with one asterisk. -->
 		<exclude name="MediaWiki.Classes.UnusedUseStatement" />
 
 		<!-- The function comment sniff is way to rigorous about way to many details that need
