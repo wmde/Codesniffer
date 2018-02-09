@@ -82,15 +82,7 @@
 	<!-- Makes sure control structures like if ( … ), for ( …; …; … ) etc. properly use spaces. -->
 	<rule ref="Squiz.ControlStructures.ControlSignature" />
 
-	<!-- Complains about duplicate parameter names in function headers. -->
-	<rule ref="Squiz.Functions.FunctionDuplicateArgument" />
-
 	<rule ref="Squiz.Functions.GlobalFunction" />
-
-	<!-- Currently contains the following sniffs:
-		- Everything in a class must have one of the private, protected, or public keywords.
-		- Static members can not be called with $this->…. -->
-	<rule ref="Squiz.Scope" />
 
 	<!-- NOTE: Do not add the Squiz.Strings.DoubleQuoteUsage sniff. Even if we encourage to prefer
 		single quotes, we don't think double quotes should block patches from being merged. -->

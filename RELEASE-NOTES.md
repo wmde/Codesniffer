@@ -2,14 +2,17 @@
 
 ## 0.3.0 (dev)
 
-* Updated the base MediaWiki rule set from 0.8 to 13.0.0. This adds the following sniffs:
+* Updated the base MediaWiki rule set from 0.8 to 15.0.0. This adds the following sniffs:
+	* `Generic.Files.OneObjectStructurePerFile` (replaces `Generic.Files.OneClass…`, `…Interface…`,
+	  and `…TraitPerFile`)
 	* `Generic.PHP.BacktickOperator`
+	* `Generic.PHP.DiscourageGoto` (replaces `MediaWiki.Usage.GotoUsage`)
 	* `MediaWiki.AlternativeSyntax.LeadingZeroInFloat`
 	* `MediaWiki.AlternativeSyntax.PHP7UnicodeSyntax`
 	* `MediaWiki.AlternativeSyntax.ShortCastSyntax`
 	* `MediaWiki.Files.ClassMatchesFilename`
-	* `MediaWiki.Files.OneClassPerFile`
 	* `MediaWiki.Usage.DeprecatedConstantUsage`
+	* `MediaWiki.Usage.ForbiddenFunctions`
 	* `MediaWiki.Usage.ReferenceThis`
 	* `MediaWiki.Usage.ScalarTypeHintUsage`
 	* `MediaWiki.VariableAnalysis.ForbiddenGlobalVariables`
