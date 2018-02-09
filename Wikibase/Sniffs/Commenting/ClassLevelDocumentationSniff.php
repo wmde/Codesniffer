@@ -12,7 +12,7 @@ use PHP_CodeSniffer\Sniffs\Sniff;
  *
  * @since 0.2.0
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Thiemo Kreuz
  */
 class ClassLevelDocumentationSniff implements Sniff {

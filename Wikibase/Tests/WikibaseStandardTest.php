@@ -16,7 +16,7 @@ use SplFileInfo;
  * Test runner for custom Wikibase CodeSniffer sniffs. This is copied from the MediaWiki CodeSniffer
  * code repository, but simplified a lot.
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Thiemo Kreuz
  */
 class WikibaseStandardTest extends PHPUnit_Framework_TestCase {
