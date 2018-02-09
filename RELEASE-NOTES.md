@@ -1,6 +1,6 @@
 # Wikibase CodeSniffer standards changelog
 
-## 0.3.0 (dev)
+## 0.3.0 (2018-02-12)
 
 * Updated the base MediaWiki rule set from 0.8 to 15.0.0. This adds the following sniffs:
 	* `Generic.Files.OneObjectStructurePerFile` (replaces `Generic.Files.OneClass…`, `…Interface…`,
@@ -17,6 +17,7 @@
 	* `MediaWiki.Usage.ScalarTypeHintUsage`
 	* `MediaWiki.VariableAnalysis.ForbiddenGlobalVariables`
 	* `MediaWiki.WhiteSpace.OpeningKeywordParenthesis`
+* Added `@package` to the disallowed PHPDoc tags
 
 ## 0.2.0 (2017-10-13)
 
