@@ -14,3 +14,4 @@
  45 | ERROR | [x] Found @Throw instead of @throws
  46 | ERROR | [x] Found @Type instead of @var
  47 | ERROR | [x] Found @Use instead of @uses
+ 68 | ERROR | [ ] PHPDoc tag @package is not allowed

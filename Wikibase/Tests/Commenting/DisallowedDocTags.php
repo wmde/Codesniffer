@@ -63,3 +63,9 @@ function upperCaseTags() {
  */
 function notADocComment() {
 }
+
+/**
+ * @package Obsolete
+ */
+function disallowedTags() {
+}
