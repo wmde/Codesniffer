@@ -7,7 +7,7 @@ use PHP_CodeSniffer\Files\DummyFile;
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Reporter;
 use PHP_CodeSniffer\Ruleset;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 use SplFileInfo;
@@ -19,7 +19,7 @@ use SplFileInfo;
  * @license GPL-2.0-or-later
  * @author Thiemo Kreuz
  */
-class WikibaseStandardTest extends PHPUnit_Framework_TestCase {
+class WikibaseStandardTest extends TestCase {
 
 	public static function provideTestCases() {
 		$tests = [];
