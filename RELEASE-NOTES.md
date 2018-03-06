@@ -1,13 +1,16 @@
 # Wikibase CodeSniffer standards changelog
 
-## 0.4.0 (dev)
+## 0.4.0 (2018-03-06)
 
-* Updated the base MediaWiki rule set from 15.x to 16.0.0. This adds the following sniffs:
+* Added custom `Wikibase.Namespaces.FullQualifiedClassName` sniff.
+* Updated the base MediaWiki rule set from 15.0.0 to 16.0.1. This adds the following sniff:
 	* `MediaWiki.Usage.AssignmentInReturn`
+* Removed `PSR1.Methods.CamelCapsMethodName` (redundant to
+  `MediaWiki.NamingConventions.LowerCamelFunctionsName`).
 
 ## 0.3.0 (2018-02-12)
 
-* Updated the base MediaWiki rule set from 0.8.x to 15.0.0. This adds the following sniffs:
+* Updated the base MediaWiki rule set from 0.8.1 to 15.0.0. This adds the following sniffs:
 	* `Generic.Files.OneObjectStructurePerFile` (replaces `Generic.Files.OneClass…`, `…Interface…`,
 	  and `…TraitPerFile`)
 	* `Generic.PHP.BacktickOperator`

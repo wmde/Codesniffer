@@ -9,7 +9,7 @@ use PHP_CodeSniffer\Sniffs\Sniff;
  * Custom sniff that disallows full qualified class names outside of the "use" section.
  *
  * Class names in the main namespace (e.g. "\Title") are intentionally allowed for several reasons:
- * - The class name is still recognizable with a single backslash in front.
+ * - The class name is still easily recognizable with the single backslash in front.
  * - A "use" takes more space than a dozen backslashes.
  * - This reflects the actual living code style in the Wikibase code bases that contain hundreds of
  *   "\MediaWikiTestCase", "\InvalidArgumentException", "\FauxRequest", and such.
