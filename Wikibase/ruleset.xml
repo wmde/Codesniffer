@@ -69,17 +69,6 @@
 		<exclude-pattern>tests*Test*\.php</exclude-pattern>
 	</rule>
 
-	<!-- See http://www.php-fig.org/psr/psr-1/ -->
-	<rule ref="PSR1">
-		<!-- Entry points typically have side effects, which is why this sniff is a "should" and not
-			a "must" in PSR-1. -->
-		<exclude name="PSR1.Files.SideEffects" />
-	</rule>
-	<rule ref="PSR1.Methods.CamelCapsMethodName">
-		<!-- Exclude test methods like "testGivenInvalidInput_methodThrowsException". -->
-		<exclude-pattern>tests*Test*\.php</exclude-pattern>
-	</rule>
-
 	<!-- Disallows ?>. See http://www.php-fig.org/psr/psr-2/#files -->
 	<rule ref="PSR2.Files.ClosingTag" />
 

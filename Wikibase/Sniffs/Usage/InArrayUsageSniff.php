@@ -54,7 +54,6 @@ class InArrayUsageSniff implements Sniff {
 			return;
 		}
 
-		// TODO: Is it worth making this fixable?
 		$phpcsFile->addError(
 			'Found slow in_array( ' . $tokens[$stackPtr]['content']
 				. ' ), should be array_key_exists or isset',
