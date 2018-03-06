@@ -1,8 +1,13 @@
 # Wikibase CodeSniffer standards changelog
 
+## 0.4.0 (dev)
+
+* Updated the base MediaWiki rule set from 15.x to 16.0.0. This adds the following sniffs:
+	* `MediaWiki.Usage.AssignmentInReturn`
+
 ## 0.3.0 (2018-02-12)
 
-* Updated the base MediaWiki rule set from 0.8 to 15.0.0. This adds the following sniffs:
+* Updated the base MediaWiki rule set from 0.8.x to 15.0.0. This adds the following sniffs:
 	* `Generic.Files.OneObjectStructurePerFile` (replaces `Generic.Files.OneClass…`, `…Interface…`,
 	  and `…TraitPerFile`)
 	* `Generic.PHP.BacktickOperator`
@@ -28,7 +33,7 @@
 	* `Wikibase.Namespaces.UnnecessaryUse`
 	* `Wikibase.Namespaces.UnusedUse`
 	* `Wikibase.Usage.InArrayUsage`
-* Updated the base MediaWiki rule set from 0.7 to 0.8.1. This adds the following sniffs:
+* Updated the base MediaWiki rule set from 0.7.x to 0.8.1. This adds the following sniffs:
 	* `Generic.Formatting.NoSpaceAfterCast`
 	* `MediaWiki.ExtraCharacters.ParenthesesAroundKeyword`
 	* `MediaWiki.NamingConventions.LowerCamelFunctionsName`
