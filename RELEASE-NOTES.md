@@ -1,6 +1,6 @@
 # Wikibase CodeSniffer standards changelog
 
-## 0.4.0 (2018-03-06)
+## 0.4.0 (2018-03-07)
 
 * Added custom `Wikibase.Namespaces.FullQualifiedClassName` sniff.
 * Updated the base MediaWiki rule set from 15.0.0 to 16.0.1. This adds the following sniff:
