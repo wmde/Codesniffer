@@ -23,7 +23,7 @@ class RedundantVarNameSniff implements Sniff {
 	public function process( File $phpcsFile, $stackPtr ) {
 		$tokens = $phpcsFile->getTokens();
 
-		if ( strtolower( $tokens[$stackPtr]['content'] ) !== '@var' ) {
+		if ( strcasecmp( $tokens[$stackPtr]['content'], '@var' ) !== 0 ) {
 			return;
 		}
 
