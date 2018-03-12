@@ -30,3 +30,9 @@ class DisallowedFullQualifiedClassName extends SomeNamespace\Example1 {
 
 class DisallowedFullQualifiedClassNameWithBackslash extends \SomeNamespace\Example1 {
 }
+
+class AllowPHPUnitFrameworkTestCaseTest extends PHPUnit\Framework\TestCase {
+}
+
+class AllowPHPUnitFrameworkTestCaseWithBackslashTest extends \PHPUnit\Framework\TestCase {
+}
