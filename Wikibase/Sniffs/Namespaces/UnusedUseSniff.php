@@ -35,7 +35,7 @@ class UnusedUseSniff implements Sniff {
 		}
 
 		$className = $tokens[$classNamePtr]['content'];
-		$varDocPattern = '(\S+\s+)?\S*\b' . preg_quote( $className, '/' ) . '\b/i';
+		$varDocPattern = '(?:\S+\s+)?\S*\b' . preg_quote( $className, '/' ) . '\b/i';
 
 		for ( $i = $useEndPtr + 1; $i < $phpcsFile->numTokens; $i++ ) {
 			$token = $tokens[$i];
@@ -44,12 +44,12 @@ class UnusedUseSniff implements Sniff {
 					&& strcasecmp( $token['content'], $className ) === 0
 				)
 				|| ( $token['code'] === T_DOC_COMMENT_TAG
-					&& preg_match( '/^@(expectedException|param|return|throw|type|var)/i', $token['content'] )
+					&& preg_match( '/^@(?:expectedException|param|return|throw|type|var)/i', $token['content'] )
 					&& $tokens[$i + 2]['code'] === T_DOC_COMMENT_STRING
 					&& preg_match( '/^' . $varDocPattern, $tokens[$i + 2]['content'] )
 				)
 				|| ( $token['code'] === T_COMMENT
-					&& preg_match( '/@(type|var)\s+' . $varDocPattern, $token['content'] )
+					&& preg_match( '/@(?:type|var)\s+' . $varDocPattern, $token['content'] )
 				)
 			) {
 				return;
