@@ -42,6 +42,8 @@ class UnusedUseSniff implements Sniff {
 
 			if ( ( $token['code'] === T_STRING
 					&& strcasecmp( $token['content'], $className ) === 0
+					&& $tokens[$i - 1]['code'] !== T_DOUBLE_COLON
+					&& $tokens[$i - 1]['code'] !== T_OBJECT_OPERATOR
 				)
 				|| ( $token['code'] === T_DOC_COMMENT_TAG
 					&& preg_match( '/^@(?:expectedException|param|return|throw|type|var)/i', $token['content'] )
