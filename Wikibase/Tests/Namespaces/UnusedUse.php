@@ -58,6 +58,10 @@ class Example implements UsedMain {
 		/* @var $var bool MentionedInComment should not count as usage */
 		$withAComment = new WithAComment();
 		$withADocComment = new WithADocComment();
+
+		// These "unused" are strings for the tokenizer, but not class names
+		PrecededByDoubleColon::unused();
+		$precededByObjectOperator->unused();
 	}
 
 }
