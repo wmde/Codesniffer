@@ -1,5 +1,11 @@
 # Wikibase CodeSniffer standards changelog
 
+## 0.4.1 (2018-03-23)
+
+* Added `PHPUnit\Framework\TestCase` to the exceptions `Wikibase.Namespaces.FullQualifiedClassName`
+  allows.
+* `Wikibase.Namespaces.UnusedUse` can't confuse method with class names any more.
+
 ## 0.4.0 (2018-03-07)
 
 * Added custom `Wikibase.Namespaces.FullQualifiedClassName` sniff.
