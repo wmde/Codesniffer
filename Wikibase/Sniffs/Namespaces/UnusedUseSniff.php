@@ -41,13 +41,13 @@ class UnusedUseSniff implements Sniff {
 			$token = $tokens[$i];
 
 			if ( ( $token['code'] === T_STRING
-					&& strcasecmp( $token['content'], $className ) === 0
 					&& $tokens[$i - 1]['code'] !== T_DOUBLE_COLON
 					&& $tokens[$i - 1]['code'] !== T_OBJECT_OPERATOR
+					&& strcasecmp( $token['content'], $className ) === 0
 				)
 				|| ( $token['code'] === T_DOC_COMMENT_TAG
-					&& preg_match( '/^@(?:expectedException|param|return|throw|type|var)/i', $token['content'] )
 					&& $tokens[$i + 2]['code'] === T_DOC_COMMENT_STRING
+					&& preg_match( '/^@(?:expectedException|param|return|throw|type|var)/i', $token['content'] )
 					&& preg_match( '/^' . $varDocPattern, $tokens[$i + 2]['content'] )
 				)
 				|| ( $token['code'] === T_COMMENT
