@@ -2,12 +2,20 @@
 
 ## 0.5.0 (dev)
 
-* Disallowed PHPDoc tags that end with a colon, e.g. `@todo:`.
+* Updated the base MediaWiki rule set from 16.0.1 to 19.0.0. This adds the following sniffs:
+	* `MediaWiki.Commenting.LicenseComment`
+	* `MediaWiki.Commenting.PhpunitAnnotations`
+	* `MediaWiki.PHP71Features.NullableType`
+	* `MediaWiki.PHP71Features.VoidReturnType`
+* Enabled `MediaWiki.Commenting.MissingCovers`.
+* Made `Wikibase.Namespaces.UnusedUse` aware of PHP7 return types.
+* Added auto-fix for PHPDoc tags that end with a colon, e.g. `@todo:`.
 * Added capitalization and spelling fixes for more PHPDoc tags:
 	* `@covers…`
 	* `@dataProvider`
 	* `@deprecated`
-	* `@expected…`
+	* `@expectedException…`
+* Added a previously missing auto-fix to `Wikibase.Commenting.ClassLevelDocumentation`.
 
 ## 0.4.1 (2018-03-23)
 
