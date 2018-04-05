@@ -15,3 +15,14 @@
  46 | ERROR | [x] Found @Type instead of @var
  47 | ERROR | [x] Found @Use instead of @uses
  68 | ERROR | [ ] PHPDoc tag @package is not allowed
+ 74 | ERROR | [x] Found @coverdefaultclass instead of @coversDefaultClass
+ 75 | ERROR | [x] Found @covernothing instead of @coversNothing
+ 76 | ERROR | [x] Found @coversdefaultclass instead of @coversDefaultClass
+ 77 | ERROR | [x] Found @coversnothing instead of @coversNothing
+ 78 | ERROR | [x] Found @dataprovider instead of @dataProvider
+ 79 | ERROR | [x] Found @deprecate instead of @deprecated
+ 80 | ERROR | [x] Found @expectedexception instead of @expectedException
+ 81 | ERROR | [x] Found @expectedexceptioncode instead of @expectedExceptionCode
+ 82 | ERROR | [x] Found @expectedexceptionmessage instead of @expectedExceptionMessage
+ 83 | ERROR | [x] Found @ToDo instead of @todo
+ 84 | ERROR | [x] Found @TODO: instead of @todo

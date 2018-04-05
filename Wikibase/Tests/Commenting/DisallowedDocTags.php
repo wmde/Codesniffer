@@ -69,3 +69,19 @@ function notADocComment() {
  */
 function disallowedTags() {
 }
+
+/**
+ * @coverdefaultclass
+ * @covernothing
+ * @coversdefaultclass
+ * @coversnothing
+ * @dataprovider
+ * @deprecate
+ * @expectedexception
+ * @expectedexceptioncode
+ * @expectedexceptionmessage
+ * @ToDo should be lowercase
+ * @TODO: Should be "@todo" or "TODO:", but not both.
+ */
+function fixups() {
+}
