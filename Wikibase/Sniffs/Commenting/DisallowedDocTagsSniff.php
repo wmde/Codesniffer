@@ -23,10 +23,12 @@ class DisallowedDocTagsSniff implements Sniff {
 	 */
 	public $disallowedTags = [
 		// https://docs.phpdoc.org/references/phpdoc/tags/index.html
+		'@deprecate' => '@deprecated',
 		'@licence' => '@license',
 		'@params' => '@param',
 		'@returns' => '@return',
 		'@throw' => '@throws',
+		'@todo' => '@todo',
 
 		// https://docs.phpdoc.org/guides/inheritance.html
 		'@inheritdoc' => '@inheritDoc',
@@ -36,6 +38,14 @@ class DisallowedDocTagsSniff implements Sniff {
 
 		// https://phpunit.de/manual/current/en/appendixes.annotations.html#appendixes.annotations.covers
 		'@cover' => '@covers',
+		'@coverdefaultclass' => '@coversDefaultClass',
+		'@covernothing' => '@coversNothing',
+		'@coversdefaultclass' => '@coversDefaultClass',
+		'@coversnothing' => '@coversNothing',
+		'@dataprovider' => '@dataProvider',
+		'@expectedexception' => '@expectedException',
+		'@expectedexceptioncode' => '@expectedExceptionCode',
+		'@expectedexceptionmessage' => '@expectedExceptionMessage',
 		'@use' => '@uses',
 
 		// https://github.com/slevomat/coding-standard#slevomatcodingstandardcommentingforbiddenannotations-
@@ -48,13 +58,15 @@ class DisallowedDocTagsSniff implements Sniff {
 
 	public function process( File $phpcsFile, $stackPtr ) {
 		$tag = $phpcsFile->getTokensAsString( $stackPtr, 1 );
-		$replacement = false;
 
-		if ( array_key_exists( $tag, $this->disallowedTags ) ) {
-			$replacement = $this->disallowedTags[$tag];
-		} elseif ( array_key_exists( strtolower( $tag ), $this->disallowedTags ) ) {
-			$replacement = $this->disallowedTags[strtolower( $tag )];
+		$normalized = rtrim( $tag, ':' );
+		if ( !array_key_exists( $normalized, $this->disallowedTags ) ) {
+			$normalized = strtolower( $normalized );
 		}
+
+		$replacement = array_key_exists( $normalized, $this->disallowedTags )
+			? $this->disallowedTags[$normalized]
+			: false;
 
 		if ( $replacement !== false && $replacement !== $tag ) {
 			if ( !is_string( $replacement ) ) {
