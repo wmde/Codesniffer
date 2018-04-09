@@ -40,7 +40,10 @@ class UnusedUseSniff implements Sniff {
 		for ( $i = $useEndPtr + 1; $i < $phpcsFile->numTokens; $i++ ) {
 			$token = $tokens[$i];
 
-			if ( ( $token['code'] === T_STRING
+			if ( ( $token['code'] === T_RETURN_TYPE
+					&& strcasecmp( $token['content'], $className ) === 0
+				)
+				|| ( $token['code'] === T_STRING
 					&& $tokens[$i - 1]['code'] !== T_DOUBLE_COLON
 					&& $tokens[$i - 1]['code'] !== T_OBJECT_OPERATOR
 					&& strcasecmp( $token['content'], $className ) === 0
