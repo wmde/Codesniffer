@@ -53,6 +53,7 @@ class WikibaseStandardTest extends TestCase {
 		$config = new Config();
 		$config->standards = [ __DIR__ . '/..' ];
 		$config->sniffs = [ $sniff ];
+		$config->reportWidth = 140;
 
 		$phpCsFile = new DummyFile( file_get_contents( $file ), new Ruleset( $config ), $config );
 		$phpCsFile->process();
