@@ -1,5 +1,14 @@
 # Wikibase CodeSniffer standards changelog
 
+## 0.5.0 (dev)
+
+* Disallowed PHPDoc tags that end with a colon, e.g. `@todo:`.
+* Added capitalization and spelling fixes for more PHPDoc tags:
+	* `@covers…`
+	* `@dataProvider`
+	* `@deprecated`
+	* `@expected…`
+
 ## 0.4.1 (2018-03-23)
 
 * Added `PHPUnit\Framework\TestCase` to the exceptions `Wikibase.Namespaces.FullQualifiedClassName`
