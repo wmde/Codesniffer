@@ -20,6 +20,7 @@ use UsedTrait;
 use UsedExpectedException;
 use UsedThrows;
 use UsedReturn;
+use UsedPhp7ReturnType;
 
 /**
  * @group Unused
@@ -62,6 +63,9 @@ class Example implements UsedMain {
 		// These "unused" are strings for the tokenizer, but not class names
 		PrecededByDoubleColon::unused();
 		$precededByObjectOperator->unused();
+	}
+
+	public function php7ReturnType(): UsedPhp7ReturnType {
 	}
 
 }
