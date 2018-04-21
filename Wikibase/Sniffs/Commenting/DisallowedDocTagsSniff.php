@@ -26,6 +26,7 @@ class DisallowedDocTagsSniff implements Sniff {
 		'@deprecate' => '@deprecated',
 		'@licence' => '@license',
 		'@params' => '@param',
+		'@parma' => '@param',
 		'@returns' => '@return',
 		'@throw' => '@throws',
 		'@todo' => '@todo',
