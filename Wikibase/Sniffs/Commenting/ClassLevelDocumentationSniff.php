@@ -16,6 +16,8 @@ use PHP_CodeSniffer\Sniffs\Sniff;
  */
 class ClassLevelDocumentationSniff implements Sniff {
 
+	public $license = '';
+
 	public function register() {
 		return [
 			T_CLASS,
@@ -57,6 +59,24 @@ class ClassLevelDocumentationSniff implements Sniff {
 		} elseif ( $tokens[$previous]['code'] !== T_DOC_COMMENT_CLOSE_TAG ) {
 			$phpcsFile->addError( 'Class level documentation missing', $stackPtr, 'Missing' );
 			return;
+		}
+
+		if ( $this->license ) {
+			$docClose = $phpcsFile->findPrevious( T_DOC_COMMENT_CLOSE_TAG, $stackPtr );
+			$docStart = $phpcsFile->findPrevious( T_DOC_COMMENT_OPEN_TAG, $docClose );
+			$docBlock = $phpcsFile->getTokensAsString( $docStart, $docClose );
+
+			if ( strpos( $docBlock, "@license {$this->license}" ) === false ) {
+				if ( $phpcsFile->addFixableWarning(
+					'No correct license',
+					$previous,
+					'NoLicense'
+				) ) {
+					$phpcsFile->fixer->addContent( $docClose - 2, " * @license {$this->license}\n" );
+				}
+			} else {
+				//TODO Wrong license
+			}
 		}
 
 		$newlines = substr_count(
