@@ -1,0 +1,22 @@
+<?php
+
+/**
+ * @license GPL-2.0-or-later
+ */
+class ClassWithNoLicense {
+}
+
+/**
+ * Very important class-level comment
+ *
+ * @license GPL-2.0-or-later
+ */
+class ClassWithCommentButNoLicense {
+}
+
+/**
+ * @license TESTTESTTEST
+ * @license GPL-2.0-or-later
+ */
+class ClassWithoutRequiredLicense {
+}
