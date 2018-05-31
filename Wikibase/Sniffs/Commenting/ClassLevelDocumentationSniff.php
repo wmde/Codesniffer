@@ -62,21 +62,7 @@ class ClassLevelDocumentationSniff implements Sniff {
 		}
 
 		if ( $this->license ) {
-			$docClose = $phpcsFile->findPrevious( T_DOC_COMMENT_CLOSE_TAG, $stackPtr );
-			$docStart = $phpcsFile->findPrevious( T_DOC_COMMENT_OPEN_TAG, $docClose );
-			$docBlock = $phpcsFile->getTokensAsString( $docStart, $docClose );
-
-			if ( strpos( $docBlock, "@license {$this->license}" ) === false ) {
-				if ( $phpcsFile->addFixableWarning(
-					'No correct license',
-					$previous,
-					'NoLicense'
-				) ) {
-					$phpcsFile->fixer->addContent( $docClose - 2, " * @license {$this->license}\n" );
-				}
-			} else {
-				//TODO Wrong license
-			}
+			$this->handleLicenseTag( $phpcsFile, $stackPtr);
 		}
 
 		$newlines = substr_count(
@@ -118,6 +104,22 @@ class ClassLevelDocumentationSniff implements Sniff {
 				$docStart,
 				'Empty'
 			);
+		}
+	}
+
+	protected function handleLicenseTag( File $phpcsFile, $stackPtr ) {
+		$docClose = $phpcsFile->findPrevious( T_DOC_COMMENT_CLOSE_TAG, $stackPtr );
+		$docStart = $phpcsFile->findPrevious( T_DOC_COMMENT_OPEN_TAG, $docClose );
+		$docBlock = $phpcsFile->getTokensAsString( $docStart, $docClose );
+
+		if ( strpos( $docBlock, "@license {$this->license}" ) === false ) {
+			if ( $phpcsFile->addFixableWarning(
+				'No correct license',
+				$docClose,
+				'NoLicense'
+			) ) {
+				$phpcsFile->fixer->addContent( $docClose - 2, " * @license {$this->license}\n" );
+			}
 		}
 	}
 
