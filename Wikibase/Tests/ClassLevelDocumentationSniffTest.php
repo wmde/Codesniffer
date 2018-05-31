@@ -21,11 +21,10 @@ class A {}
 PHP;
 
 		$helper = new SniffTestHelper(
-			ClassLevelDocumentationSniff::class ,
-			['license' => $givenLicense ]
+			ClassLevelDocumentationSniff::class,
+			[ 'license' => $givenLicense ]
 		);
 		$phpCsFile = $helper->createFileObject( $noLicense );
-
 
 		$phpCsFile->process();
 		$phpCsFile->fixer->fixFile();
@@ -52,17 +51,43 @@ class A {}
 PHP;
 
 		$helper = new SniffTestHelper(
-			ClassLevelDocumentationSniff::class ,
-			['license' => '' ]
+			ClassLevelDocumentationSniff::class,
+			[ 'license' => '' ]
 		);
 		$phpCsFile = $helper->createFileObject( $noLicense );
-
 
 		$phpCsFile->process();
 		$phpCsFile->fixer->fixFile();
 		$result = $phpCsFile->fixer->getContents();
 
 		$this->assertEquals( $noLicense, $result );
+	}
+
+	public function testNoDocBlock_AddsDocBlockWithLicense() {
+		$noLicense = <<<PHP
+<?php
+class A {}
+PHP;
+
+		$helper = new SniffTestHelper(
+			ClassLevelDocumentationSniff::class,
+			[ 'license' => 'GPLv2' ]
+		);
+		$phpCsFile = $helper->createFileObject( $noLicense );
+
+		$phpCsFile->process();
+		$phpCsFile->fixer->fixFile();
+		$result = $phpCsFile->fixer->getContents();
+
+		$withLicense = <<<PHP
+<?php
+/**
+ * @license GPLv2
+ */
+class A {}
+PHP;
+
+		$this->assertEquals( $withLicense, $result );
 	}
 
 }

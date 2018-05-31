@@ -5,7 +5,11 @@ namespace Wikibase\CodeSniffer\Tests;
 use PHP_CodeSniffer\Config;
 use PHP_CodeSniffer\Files\DummyFile;
 use PHP_CodeSniffer\Ruleset;
+use PHP_CodeSniffer\Util\Common;
 
+/**
+ * @license GPL-2.0-or-later
+ */
 class SniffTestHelper {
 
 	/**
@@ -16,7 +20,7 @@ class SniffTestHelper {
 	private $properties = [];
 
 	public function __construct( $sniffClass, array $properties ) {
-		assert( class_exists( $sniffClass ), "Class {$sniffClass} was not found");
+		assert( class_exists( $sniffClass ), "Class {$sniffClass} was not found" );
 		$this->sniffClass = $sniffClass;
 		$this->properties = $properties;
 	}
@@ -26,7 +30,7 @@ class SniffTestHelper {
 	 */
 	public function createFileObject( $contents ) {
 
-		$sniffCode = \PHP_CodeSniffer\Util\Common::getSniffCode( $this->sniffClass );
+		$sniffCode = Common::getSniffCode( $this->sniffClass );
 
 		$config = new Config( [], false );
 		$config->sniffs = [ $sniffCode ];
@@ -40,4 +44,5 @@ class SniffTestHelper {
 
 		return new DummyFile( $contents, $ruleset, $config );
 	}
+
 }
