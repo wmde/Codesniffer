@@ -2,9 +2,6 @@
 
 namespace Wikibase\CodeSniffer\Tests;
 
-use PHP_CodeSniffer\Config;
-use PHP_CodeSniffer\Files\DummyFile;
-use PHP_CodeSniffer\Ruleset;
 use Wikibase\Sniffs\Commenting\ClassLevelDocumentationSniff;
 
 /**
@@ -13,7 +10,6 @@ use Wikibase\Sniffs\Commenting\ClassLevelDocumentationSniff;
 class ClassLevelDocumentationSniffTest extends \PHPUnit_Framework_TestCase {
 
 	public function testAddsCorrectLicenseIfNonePresent() {
-		$sniff = 'Wikibase.Commenting.ClassLevelDocumentation';
 		$givenLicense = 'GPLv2';
 
 		$noLicense = <<<PHP
@@ -24,16 +20,14 @@ class ClassLevelDocumentationSniffTest extends \PHPUnit_Framework_TestCase {
 class A {}
 PHP;
 
-		$config = new Config( [], false );
-		$config->sniffs = [ $sniff ];
+		$helper = new SniffTestHelper(
+			ClassLevelDocumentationSniff::class ,
+			['license' => $givenLicense ]
+		);
+		$phpCsFile = $helper->createFileObject( $noLicense );
 
-		$ruleset = new Ruleset( $config );
-		// Neet to set property both ways: for file->process() and for fixer to work
-		$ruleset->setSniffProperty( ClassLevelDocumentationSniff::class, 'license', $givenLicense );
-		$ruleset->ruleset[$sniff]['properties'] = [ 'license' => $givenLicense ];
-		$phpCsFile = new DummyFile( $noLicense, $ruleset, $config );
+
 		$phpCsFile->process();
-
 		$phpCsFile->fixer->fixFile();
 		$result = $phpCsFile->fixer->getContents();
 
@@ -46,6 +40,29 @@ PHP;
 class A {}
 PHP;
 		$this->assertEquals( $withLicense, $result );
+	}
+
+	public function testDoesntDoAnythingIfLicenseIsNotSet() {
+		$noLicense = <<<PHP
+<?php
+/**
+ * Just some text
+ */
+class A {}
+PHP;
+
+		$helper = new SniffTestHelper(
+			ClassLevelDocumentationSniff::class ,
+			['license' => '' ]
+		);
+		$phpCsFile = $helper->createFileObject( $noLicense );
+
+
+		$phpCsFile->process();
+		$phpCsFile->fixer->fixFile();
+		$result = $phpCsFile->fixer->getContents();
+
+		$this->assertEquals( $noLicense, $result );
 	}
 
 }
