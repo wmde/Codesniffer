@@ -10,7 +10,7 @@ use Wikibase\Sniffs\Commenting\ClassLevelDocumentationSniff;
 class ClassLevelDocumentationSniffTest extends \PHPUnit_Framework_TestCase {
 
 	public function testAddsCorrectLicenseIfNonePresent() {
-		$givenLicense = 'GPLv2';
+		$givenLicense = 'http://opensource.org/licenses/gpl-license.php GNU Public License';
 
 		$noLicense = <<<PHP
 <?php
@@ -35,7 +35,7 @@ PHP;
 <?php
 /**
  * Just some text
- * @license GPLv2
+ * @license http://opensource.org/licenses/gpl-license.php GNU Public License
  */
 class A {}
 PHP;
