@@ -109,7 +109,7 @@ class ClassLevelDocumentationSniff implements Sniff {
 		}
 	}
 
-	protected function handleLicenseTag( File $phpcsFile, $stackPtr ) {
+	private function handleLicenseTag( File $phpcsFile, $stackPtr ) {
 		$docClose = $phpcsFile->findPrevious( T_DOC_COMMENT_CLOSE_TAG, $stackPtr );
 		$docBlockExists = $docClose !== false;
 		if ( $docBlockExists ) {
