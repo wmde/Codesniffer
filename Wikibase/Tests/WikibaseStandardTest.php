@@ -31,15 +31,40 @@ class WikibaseStandardTest extends TestCase {
 	 * @dataProvider provideIntegrationTestCases
 	 */
 	public function testWikibaseStandard( $file ) {
+		$expectedFile = $file . '.expected';
+		$fixedFile = $file . '.fixed';
+
 		$config = new Config();
 		$config->standards = [ __DIR__ . '/..' ];
+		$ruleset = new Ruleset( $config );
 
-		$phpCsFile = new DummyFile( file_get_contents( $file ), new Ruleset( $config ), $config );
+		$content = file_get_contents( $file );
+		preg_match_all(
+			'/\bphpcs:property +\\\\?([\w\\\\]+)::\$(\w+) *= *(.*)/',
+			$content,
+			$matches,
+			PREG_SET_ORDER
+		);
+		foreach ( $matches as $match ) {
+			list( , $sniffClass, $property, $value ) = $match;
+			// Required for reporting
+			$ruleset->setSniffProperty( $sniffClass, $property, $value );
+		}
+
+		$phpCsFile = new DummyFile( $content, $ruleset, $config );
 		$phpCsFile->process();
-		// Intentionally only test the fixer, reporting is already covered by the isolated tests
-		$phpCsFile->fixer->fixFile();
-		$actual = $phpCsFile->fixer->getContents();
-		$this->assertSame( file_get_contents( $file . '.fixed' ), $actual );
+
+		// Optional here, as reporting is already covered by the isolated tests
+		if ( file_exists( $expectedFile ) ) {
+			$actual = $this->getPhpCbfReport( $phpCsFile );
+			$this->assertSame( file_get_contents( $expectedFile ), $actual );
+		}
+
+		if ( file_exists( $fixedFile ) ) {
+			$phpCsFile->fixer->fixFile();
+			$actual = $phpCsFile->fixer->getContents();
+			$this->assertSame( file_get_contents( $fixedFile ), $actual );
+		}
 	}
 
 	public function provideIsolatedTestCases() {
