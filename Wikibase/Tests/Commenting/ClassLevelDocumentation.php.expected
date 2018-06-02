@@ -1,5 +1,5 @@
- 17 | WARNING | [ ] No newline after class level documentation
- 22 | WARNING | [ ] No newline after class level documentation
+ 17 | WARNING | [x] No newline after class level documentation
+ 22 | WARNING | [x] No newline after class level documentation
  28 | WARNING | [x] To many newlines after class level documentation
  34 | ERROR   | [x] Regular comment found instead of class level documentation
  38 | ERROR   | [ ] Class level documentation missing
@@ -8,7 +8,7 @@
  47 | ERROR   | [ ] Class level documentation missing
  50 | ERROR   | [ ] Class level documentation missing
  54 | ERROR   | [ ] Class level documentation missing
- 56 | WARNING | [ ] No newline after class level documentation
+ 56 | WARNING | [x] No newline after class level documentation
  59 | WARNING | [x] To many newlines after class level documentation
  66 | ERROR   | [ ] Class level documentation missing
  70 | ERROR   | [ ] Class level documentation is empty

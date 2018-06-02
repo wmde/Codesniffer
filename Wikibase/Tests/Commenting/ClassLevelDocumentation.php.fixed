@@ -14,12 +14,14 @@ abstract class DocumentedAbstractClass {
 
 /**
  * Missing newline between comment and class.
- */class MissingNewline {
+ */
+class MissingNewline {
 }
 
 /**
  * Wrong whitespace character between comment and class.
- */ class WrongWhitespace {
+ */
+ class WrongWhitespace {
 }
 
 /**
@@ -52,7 +54,8 @@ class UndocumentedSubClass extends UndocumentedClass {
 namespace UndocumentedNamespace {
 	class UndocumentedClassInNamespace {
 	}
-	/** Doc */class MissingNewlineInNamespace {
+	/** Doc */
+	class MissingNewlineInNamespace {
 	}
 	/** Doc */
 	class ToManyNewlinesInNamespace {

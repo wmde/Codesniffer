@@ -65,12 +65,17 @@ class ClassLevelDocumentationSniff implements Sniff {
 			"\n"
 		);
 		if ( !$newlines ) {
-			// Recreating the correct indention is hard, that's why this is not fixable here
-			$phpcsFile->addWarning(
+			if ( $phpcsFile->addFixableWarning(
 				'No newline after class level documentation',
 				$stackPtr - 1,
 				'MissingNewline'
-			);
+			) ) {
+				// This fix intentionally does not try to be too clever about non-tab indentions
+				$phpcsFile->fixer->addContent(
+					$previous,
+					$phpcsFile->eolChar . str_repeat( "\t", $tokens[$stackPtr]['level'] )
+				);
+			}
 		} elseif ( $newlines > 1 ) {
 			if ( $phpcsFile->addFixableWarning(
 				'To many newlines after class level documentation',
