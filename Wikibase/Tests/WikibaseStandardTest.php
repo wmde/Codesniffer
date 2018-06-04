@@ -21,7 +21,7 @@ use SplFileInfo;
  */
 class WikibaseStandardTest extends TestCase {
 
-	public static function provideTestCases() {
+	public function provideIsolatedTestCases() {
 		$tests = [];
 		$iterator = new RecursiveIteratorIterator( new RecursiveDirectoryIterator( __DIR__ ) );
 
@@ -44,9 +44,9 @@ class WikibaseStandardTest extends TestCase {
 	}
 
 	/**
-	 * @dataProvider provideTestCases
+	 * @dataProvider provideIsolatedTestCases
 	 */
-	public function testCodeSnifferStandardFiles( $sniff, $file ) {
+	public function testSniffsInIsolation( $sniff, $file ) {
 		$expectedFile = $file . '.expected';
 		$fixedFile = $file . '.fixed';
 
