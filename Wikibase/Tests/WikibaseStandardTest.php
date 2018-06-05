@@ -23,14 +23,9 @@ class WikibaseStandardTest extends TestCase {
 
 	public function provideIsolatedTestCases() {
 		$tests = [];
-		$iterator = new RecursiveIteratorIterator( new RecursiveDirectoryIterator( __DIR__ ) );
 
-		/** @var SplFileInfo $file */
-		foreach ( $iterator as $file ) {
-			if ( !$file->isFile()
-				|| $file->getExtension() !== 'php'
-				|| $file->getPath() === __DIR__
-			) {
+		foreach ( $this->scanPhpFiles( __DIR__ ) as $file ) {
+			if ( $file->getPath() === __DIR__ ) {
 				continue;
 			}
 
@@ -70,6 +65,25 @@ class WikibaseStandardTest extends TestCase {
 			$actual = $phpCsFile->fixer->getContents();
 			$this->assertSame( file_get_contents( $fixedFile ), $actual );
 		}
+	}
+
+	/**
+	 * @param string $path
+	 *
+	 * @return SplFileInfo[]
+	 */
+	private function scanPhpFiles( $path ) {
+		$files = [];
+		$iterator = new RecursiveIteratorIterator( new RecursiveDirectoryIterator( $path ) );
+
+		/** @var SplFileInfo $file */
+		foreach ( $iterator as $file ) {
+			if ( $file->isFile() && $file->getExtension() === 'php' ) {
+				$files[] = $file;
+			}
+		}
+
+		return $files;
 	}
 
 	/**
