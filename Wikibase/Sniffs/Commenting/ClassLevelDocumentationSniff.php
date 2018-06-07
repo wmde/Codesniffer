@@ -4,6 +4,7 @@ namespace Wikibase\Sniffs\Commenting;
 
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Sniffs\Sniff;
+use PHP_CodeSniffer\Util\Tokens;
 
 /**
  * Custom sniff that reports classes, interfaces, and traits that are not directly preceded by a
@@ -18,20 +19,13 @@ use PHP_CodeSniffer\Sniffs\Sniff;
 class ClassLevelDocumentationSniff implements Sniff {
 
 	public function register() {
-		return [
-			T_CLASS,
-			T_INTERFACE,
-			T_TRAIT,
-		];
+		return Tokens::$ooScopeTokens;
 	}
 
 	public function process( File $phpcsFile, $stackPtr ) {
 		$tokens = $phpcsFile->getTokens();
-		$previous = $phpcsFile->findPrevious( [
-			T_ABSTRACT,
-			T_FINAL,
-			T_WHITESPACE,
-		], $stackPtr - 1, null, true );
+		$tokensToSkip = array_merge( Tokens::$methodPrefixes, [ T_WHITESPACE ] );
+		$previous = $phpcsFile->findPrevious( $tokensToSkip, $stackPtr - 1, null, true );
 
 		if ( $tokens[$previous]['code'] === T_COMMENT
 			&& substr( $tokens[$previous]['content'], -2 ) === '*/'
@@ -92,7 +86,7 @@ class ClassLevelDocumentationSniff implements Sniff {
 			}
 		}
 
-		$docStart = $phpcsFile->findPrevious( T_DOC_COMMENT_OPEN_TAG, $previous - 1 );
+		$docStart = $tokens[$previous]['comment_opener'];
 		if ( !$phpcsFile->findNext( T_DOC_COMMENT_STRING, $docStart + 1, $previous ) ) {
 			$phpcsFile->addError(
 				'Class level documentation is empty',
