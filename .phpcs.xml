@@ -2,6 +2,12 @@
 <ruleset>
 	<rule ref="Wikibase" />
 
+	<rule ref="Wikibase.Commenting.ClassLevelDocumentation">
+		<properties>
+			<property name="license" value="GPL-2.0-or-later" />
+		</properties>
+	</rule>
+
 	<file>.</file>
 	<exclude-pattern>Tests/*/</exclude-pattern>
 </ruleset>
