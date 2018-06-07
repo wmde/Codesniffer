@@ -22,8 +22,6 @@ use SplFileInfo;
 class WikibaseStandardTest extends TestCase {
 
 	public function provideIsolatedTestCases() {
-		$tests = [];
-
 		foreach ( $this->scanPhpFiles( __DIR__ ) as $file ) {
 			if ( $file->getPath() === __DIR__ ) {
 				continue;
@@ -32,10 +30,8 @@ class WikibaseStandardTest extends TestCase {
 			$shortName = $file->getBasename( '.' . $file->getExtension() );
 			$sniff = 'Wikibase.' . basename( $file->getPath() ) . '.' . $shortName;
 
-			$tests[$shortName] = [ $sniff, $file->getPathname() ];
+			yield $shortName => [ $sniff, $file->getPathname() ];
 		}
-
-		return $tests;
 	}
 
 	/**
@@ -73,17 +69,14 @@ class WikibaseStandardTest extends TestCase {
 	 * @return SplFileInfo[]
 	 */
 	private function scanPhpFiles( $path ) {
-		$files = [];
 		$iterator = new RecursiveIteratorIterator( new RecursiveDirectoryIterator( $path ) );
 
 		/** @var SplFileInfo $file */
 		foreach ( $iterator as $file ) {
 			if ( $file->isFile() && $file->getExtension() === 'php' ) {
-				$files[] = $file;
+				yield $file;
 			}
 		}
-
-		return $files;
 	}
 
 	/**
