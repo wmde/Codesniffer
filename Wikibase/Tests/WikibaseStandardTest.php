@@ -7,6 +7,7 @@ use PHP_CodeSniffer\Files\DummyFile;
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Reporter;
 use PHP_CodeSniffer\Ruleset;
+use PHP_CodeSniffer\Util\Common;
 use PHPUnit\Framework\TestCase;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
@@ -47,8 +48,13 @@ class WikibaseStandardTest extends TestCase {
 		);
 		foreach ( $matches as $match ) {
 			list( , $sniffClass, $property, $value ) = $match;
+
 			// Required for reporting
 			$ruleset->setSniffProperty( $sniffClass, $property, $value );
+
+			// Required for fixing
+			$sniffCode = Common::getSniffCode( $sniffClass );
+			$ruleset->ruleset[$sniffCode]['properties'][$property] = $value;
 		}
 
 		$phpCsFile = new DummyFile( $content, $ruleset, $config );

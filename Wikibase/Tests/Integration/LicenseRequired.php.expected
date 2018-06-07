@@ -1,0 +1,10 @@
+  6 | ERROR   | [x] @license missing
+  9 | ERROR   | [x] @license missing
+ 16 | ERROR   | [x] Wrong @license
+ 23 | ERROR   | [x] Found @licence instead of @license
+ 28 | ERROR   | [x] @license missing
+ 30 | WARNING | [x] No newline after class level documentation
+ 35 | ERROR   | [x] Regular comment found instead of class level documentation
+ 41 | ERROR   | [x] @license missing
+ 44 | ERROR   | [x] @license missing
+ 52 | ERROR   | [x] @license not followed by a license

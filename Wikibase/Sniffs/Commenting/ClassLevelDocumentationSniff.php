@@ -4,6 +4,7 @@ namespace Wikibase\Sniffs\Commenting;
 
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Sniffs\Sniff;
+use PHP_CodeSniffer\Util\Tokens;
 
 /**
  * Custom sniff that reports classes, interfaces, and traits that are not directly preceded by a
@@ -16,6 +17,11 @@ use PHP_CodeSniffer\Sniffs\Sniff;
  * @author Thiemo Kreuz
  */
 class ClassLevelDocumentationSniff implements Sniff {
+
+	/**
+	 * @var string
+	 */
+	public $license = '';
 
 	public function register() {
 		return [
@@ -56,7 +62,11 @@ class ClassLevelDocumentationSniff implements Sniff {
 
 			return;
 		} elseif ( $tokens[$previous]['code'] !== T_DOC_COMMENT_CLOSE_TAG ) {
-			$phpcsFile->addError( 'Class level documentation missing', $stackPtr, 'Missing' );
+			if ( !$this->license ) {
+				$phpcsFile->addError( 'Class level documentation missing', $stackPtr, 'Missing' );
+			} elseif ( $phpcsFile->addFixableError( '@license missing', $stackPtr, 'LicenseMissing' ) ) {
+				$this->addLicenseComment( $phpcsFile, $previous + 1 );
+			}
 			return;
 		}
 
@@ -92,13 +102,68 @@ class ClassLevelDocumentationSniff implements Sniff {
 			}
 		}
 
-		$docStart = $phpcsFile->findPrevious( T_DOC_COMMENT_OPEN_TAG, $previous - 1 );
-		if ( !$phpcsFile->findNext( T_DOC_COMMENT_STRING, $docStart + 1, $previous ) ) {
+		$docStart = $tokens[$previous]['comment_opener'];
+
+		if ( $this->license ) {
+			$this->fixLicense( $phpcsFile, $docStart, $previous );
+		} elseif ( !$phpcsFile->findNext( T_DOC_COMMENT_STRING, $docStart + 1, $previous ) ) {
 			$phpcsFile->addError(
 				'Class level documentation is empty',
 				$docStart,
 				'Empty'
 			);
+		}
+	}
+
+	/**
+	 * @param File $phpcsFile
+	 * @param int $position
+	 */
+	private function addLicenseComment( File $phpcsFile, $position ) {
+		$tokens = $phpcsFile->getTokens();
+
+		// Skip empty tags in case $position did not pointed to the exact position
+		$position = $phpcsFile->findNext( Tokens::$emptyTokens, $position, null, true );
+		$indention = str_repeat( "\t", $tokens[$position]['level'] );
+		$phpcsFile->fixer->addContentBefore(
+			$position,
+			"/**\n$indention * @license $this->license\n$indention */\n$indention"
+		);
+	}
+
+	/**
+	 * @param File $phpcsFile
+	 * @param int $docStart
+	 * @param int $docEnd
+	 */
+	private function fixLicense( File $phpcsFile, $docStart, $docEnd ) {
+		$tokens = $phpcsFile->getTokens();
+
+		// Intentionally scan bottom-up because @license tags are typically at the end
+		foreach ( array_reverse( $tokens[$docStart]['comment_tags'] ) as $i ) {
+			if ( !preg_match( '/^@licen[cs]e$/i', $tokens[$i]['content'] ) ) {
+				continue;
+			}
+
+			if ( $tokens[$i + 1]['code'] !== T_DOC_COMMENT_WHITESPACE
+				|| $tokens[$i + 2]['code'] !== T_DOC_COMMENT_STRING
+			) {
+				if ( $phpcsFile->addFixableError( '@license not followed by a license', $i, 'LicenseEmpty' ) ) {
+					$phpcsFile->fixer->addContent( $i, " $this->license" );
+				}
+			} elseif ( strcasecmp( $tokens[$i + 2]['content'], $this->license ) !== 0
+				&& $phpcsFile->addFixableError( 'Wrong @license', $i, 'LicenseWrong' )
+			) {
+				$phpcsFile->fixer->replaceToken( $i + 2, $this->license );
+			}
+
+			// Found (and fixed) an existing @license tag, don't add another one
+			return;
+		}
+
+		if ( $phpcsFile->addFixableError( '@license missing', $docStart, 'LicenseMissing' ) ) {
+			$indention = str_repeat( "\t", $tokens[$docEnd]['level'] );
+			$phpcsFile->fixer->addContent( $docEnd - 1, "* @license $this->license\n$indention " );
 		}
 	}
 

@@ -1,0 +1,67 @@
+<?php
+
+// phpcs:property Wikibase\Sniffs\Commenting\ClassLevelDocumentationSniff::$license = MIT
+// phpcs:disable Generic.Files.OneObjectStructurePerFile
+
+/**
+ * @license MIT
+ */
+class Undocumented {
+}
+
+/**
+ * @todo Add license.
+ * @license MIT
+ */
+class Unlicensed {
+}
+
+/**
+ * @license MIT
+ */
+class WrongLicense {
+}
+
+/**
+ * @license LGPL-3.0-or-later
+ * @license MIT
+ */
+class MultiLicensed {
+}
+
+/**
+ * @inheritDoc
+ * @license MIT
+ */
+class MisplacedEmptyComment {
+}
+
+/**
+ * @license MIT
+ */
+class NonPhpDocComment {
+}
+
+namespace Nested {
+
+	/**
+	 * @license MIT
+	 */
+	abstract class Undocumented {
+	}
+
+	/**
+	 * @inheritDoc
+	 * @license MIT
+	 */
+	class EmptyComment {
+	}
+
+	/**
+	 * Multiple sniffs detect this, but no other can fix it.
+	 * @license MIT
+	 */
+	class EmptyLicense {
+	}
+
+}
