@@ -17,7 +17,6 @@ use SplFileInfo;
  * code repository, but simplified a lot.
  *
  * @license GPL-2.0-or-later
- * @author Thiemo Kreuz
  */
 class WikibaseStandardTest extends TestCase {
 
