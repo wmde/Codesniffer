@@ -29,7 +29,7 @@ How to install
     ```
     {
     	"require-dev": {
-    		"wikibase/wikibase-codesniffer": "^0.4.0"
+    		"wikibase/wikibase-codesniffer": "^0.5.0"
     	},
     	"scripts": {
     		"test": [

@@ -1,6 +1,6 @@
 # Wikibase CodeSniffer standards changelog
 
-## 0.5.0 (dev)
+## 0.5.0 (2018-07-19)
 
 * Updated the base MediaWiki rule set from 16.0.1 to 19.0.0. This adds the following sniffs:
 	* `MediaWiki.Commenting.LicenseComment`
