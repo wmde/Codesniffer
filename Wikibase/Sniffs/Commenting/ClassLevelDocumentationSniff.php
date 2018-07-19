@@ -16,6 +16,8 @@ use PHP_CodeSniffer\Sniffs\Sniff;
  */
 class ClassLevelDocumentationSniff implements Sniff {
 
+	public $license = '';
+
 	public function register() {
 		return [
 			T_CLASS,
@@ -56,7 +58,13 @@ class ClassLevelDocumentationSniff implements Sniff {
 			return;
 		} elseif ( $tokens[$previous]['code'] !== T_DOC_COMMENT_CLOSE_TAG ) {
 			$phpcsFile->addError( 'Class level documentation missing', $stackPtr, 'Missing' );
-			return;
+			if ( !$this->license ) {
+				return;
+			}
+		}
+
+		if ( $this->license ) {
+			$this->handleLicenseTag( $phpcsFile, $stackPtr );
 		}
 
 		$newlines = substr_count(
@@ -98,6 +106,42 @@ class ClassLevelDocumentationSniff implements Sniff {
 				$docStart,
 				'Empty'
 			);
+		}
+	}
+
+	private function handleLicenseTag( File $phpcsFile, $stackPtr ) {
+		$docClose = $phpcsFile->findPrevious( T_DOC_COMMENT_CLOSE_TAG, $stackPtr );
+		$docBlockExists = $docClose !== false;
+		if ( $docBlockExists ) {
+			$docStart = $phpcsFile->findPrevious( T_DOC_COMMENT_OPEN_TAG, $docClose );
+			$docBlock = $phpcsFile->getTokensAsString( $docStart, $docClose );
+
+			if ( strpos( $docBlock, "@license {$this->license}" ) === false ) {
+				if ( $phpcsFile->addFixableWarning(
+					'No correct license',
+					$docClose,
+					'NoLicense'
+				) ) {
+					$phpcsFile->fixer->addContent( $docClose - 2, " * @license {$this->license}\n" );
+				}
+			}
+		} else {
+			if ( $phpcsFile->addFixableWarning(
+				'No correct license',
+				$docClose,
+				'NoLicense'
+			) ) {
+				$classDeclarationStart = $phpcsFile->findPrevious( [
+														  T_ABSTRACT,
+														  T_FINAL,
+														  T_WHITESPACE,
+													  ], $stackPtr - 1, null, true );
+
+				$phpcsFile->fixer->addContent(
+					$classDeclarationStart,
+					"/**\n * @license {$this->license}\n */\n"
+				);
+			}
 		}
 	}
 

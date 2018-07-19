@@ -15,6 +15,8 @@
 	* `@dataProvider`
 	* `@deprecated`
 	* `@expectedException…`
+	* `@expected…`
+* Sniff `Wikibase.Commenting.ClassLevelDocumentation` now supports parameter `license` which will enforce presence of correct value in `@license` tag
 
 ## 0.4.1 (2018-03-23)
 
