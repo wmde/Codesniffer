@@ -5,6 +5,8 @@ namespace Wikibase\CodeSniffer\Tests;
 use Wikibase\Sniffs\Commenting\ClassLevelDocumentationSniff;
 
 /**
+ * @covers \Wikibase\Sniffs\Commenting\ClassLevelDocumentationSniff
+ *
  * @license GPL-2.0-or-later
  */
 class ClassLevelDocumentationSniffTest extends \PHPUnit_Framework_TestCase {

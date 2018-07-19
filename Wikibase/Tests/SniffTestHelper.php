@@ -8,6 +8,8 @@ use PHP_CodeSniffer\Ruleset;
 use PHP_CodeSniffer\Util\Common;
 
 /**
+ * phpcs:disable MediaWiki.Usage.ForbiddenFunctions.assert
+ *
  * @license GPL-2.0-or-later
  */
 class SniffTestHelper {
