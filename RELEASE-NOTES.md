@@ -15,7 +15,6 @@
 	* `@dataProvider`
 	* `@deprecated`
 	* `@expectedException…`
-* Added a previously missing auto-fix to `Wikibase.Commenting.ClassLevelDocumentation`.
 
 ## 0.4.1 (2018-03-23)
 
