@@ -10,9 +10,6 @@
 
 		<!-- The function comment sniff is way to rigorous about way to many details that need
 			exceptions:
-			* It complains when "@param <type> $<var>" is not followed by a comment, even if type
-			  and variable name are fully self-explanatory. We do have 3000+ of these in the
-			  Wikibase code base.
 			* It complains about missing documentation on fully self-explanatory function headers
 			  with strict type hints.
 			* It complains about missing documentation if there is a proper @see tag.
@@ -24,10 +21,6 @@
 		<!-- We disagree with the idea of certain characters making comments "illegal" and blocking
 			patches from being merged. This behaves especially bad on code examples. -->
 		<exclude name="MediaWiki.Commenting.IllegalSingleLineComment" />
-
-		<!-- Temporary disabled because it erroneously reports missing @covers tags on abstract base
-			classes. -->
-		<exclude name="MediaWiki.Commenting.MissingCovers" />
 
 		<!-- Individual projects should be free to decide if they want to wait for PHPUnit 6, or
 			start using namespaced class names in advance. -->

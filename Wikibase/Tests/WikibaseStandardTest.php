@@ -16,6 +16,8 @@ use SplFileInfo;
  * Test runner for custom Wikibase CodeSniffer sniffs. This is copied from the MediaWiki CodeSniffer
  * code repository, but simplified a lot.
  *
+ * phpcs:disable MediaWiki.Commenting.MissingCovers
+ *
  * @license GPL-2.0-or-later
  */
 class WikibaseStandardTest extends TestCase {
