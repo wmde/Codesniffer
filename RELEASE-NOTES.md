@@ -1,5 +1,10 @@
 # Wikibase CodeSniffer standards changelog
 
+## 0.5.1 (dev)
+
+* Updated the base MediaWiki rule set from 19.0.0 to 19.1.0.
+  This fixes compatibility with PHP 7.3.
+
 ## 0.5.0 (2018-07-19)
 
 * Updated the base MediaWiki rule set from 16.0.1 to 19.0.0. This adds the following sniffs:
