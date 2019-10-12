@@ -1,5 +1,11 @@
 # Wikibase CodeSniffer standards changelog
 
+## 1.0.0 (2019-10-12)
+
+* Updated the base MediaWiki rule set from 19.1.0 to 28.0.0.
+  This adds many new sniffs and drops PHP <7.2 compatibility
+* This version of WikibaseCodeSniffer also requires PHP >=7.2
+
 ## 0.5.1 (2018-11-27)
 
 * Updated the base MediaWiki rule set from 19.0.0 to 19.1.0.
