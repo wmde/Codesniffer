@@ -22,10 +22,6 @@
 			patches from being merged. This behaves especially bad on code examples. -->
 		<exclude name="MediaWiki.Commenting.IllegalSingleLineComment" />
 
-		<!-- Individual projects should be free to decide if they want to wait for PHPUnit 6, or
-			start using namespaced class names in advance. -->
-		<exclude name="MediaWiki.Usage.PHPUnitClassUsage" />
-
 		<!-- Starting a function's body with an empty line can be helpful after a very large header.
 			The code is not guaranteed to be easier to read if this is disallowed. -->
 		<exclude name="MediaWiki.WhiteSpace.DisallowEmptyLineFunctions" />
