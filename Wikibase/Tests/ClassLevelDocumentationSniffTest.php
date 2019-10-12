@@ -2,6 +2,7 @@
 
 namespace Wikibase\CodeSniffer\Tests;
 
+use PHPUnit\Framework\TestCase;
 use Wikibase\Sniffs\Commenting\ClassLevelDocumentationSniff;
 
 /**
@@ -9,7 +10,7 @@ use Wikibase\Sniffs\Commenting\ClassLevelDocumentationSniff;
  *
  * @license GPL-2.0-or-later
  */
-class ClassLevelDocumentationSniffTest extends \PHPUnit_Framework_TestCase {
+class ClassLevelDocumentationSniffTest extends TestCase {
 
 	public function testAddsCorrectLicenseIfNonePresent() {
 		$givenLicense = 'http://opensource.org/licenses/gpl-license.php GNU Public License';
