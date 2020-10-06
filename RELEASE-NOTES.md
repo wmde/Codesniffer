@@ -1,5 +1,9 @@
 # Wikibase CodeSniffer standards changelog
 
+## 1.2.0 (2020-10-06)
+
+* Upgrade MediaWiki Code Sniffer from v29 to v31
+
 ## 1.1.0 (2020-01-24)
 
 * Upgrade PHPUnit from ^4.8.35 to ^8.4
