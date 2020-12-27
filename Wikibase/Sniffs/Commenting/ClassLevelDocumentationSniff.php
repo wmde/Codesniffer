@@ -16,6 +16,9 @@ use PHP_CodeSniffer\Sniffs\Sniff;
  */
 class ClassLevelDocumentationSniff implements Sniff {
 
+	/**
+	 * @var string
+	 */
 	public $license = '';
 
 	public function register() {
