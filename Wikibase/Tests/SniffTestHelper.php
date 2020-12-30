@@ -19,6 +19,9 @@ class SniffTestHelper {
 	 */
 	private $sniffClass;
 
+	/**
+	 * @var array
+	 */
 	private $properties = [];
 
 	public function __construct( $sniffClass, array $properties ) {
