@@ -21,9 +21,12 @@ use UsedExpectedException;
 use UsedThrows;
 use UsedReturn;
 use UsedPhp7ReturnType;
+use UsedSee;
+use UsedSeeMethod;
 
 /**
  * @group Unused
+ * @see UsedSee
  */
 class Example implements UsedMain {
 
@@ -45,6 +48,7 @@ class Example implements UsedMain {
 	private $prop3;
 
 	/**
+	 * @see UsedSeeMethod::method
 	 * @expectedException UsedExpectedException
 	 * @param int[]|UsedInAnArray[] $arg
 	 * @param bool $arg MentionedInComment should not count as usage

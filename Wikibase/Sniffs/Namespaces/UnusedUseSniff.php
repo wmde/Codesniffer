@@ -35,6 +35,7 @@ class UnusedUseSniff implements Sniff {
 		}
 
 		$className = $tokens[$classNamePtr]['content'];
+		$docTagPattern = 'expectedException|param|return|see|throw|type|var';
 		$varDocPattern = '(?:\S+\s+)?\S*\b' . preg_quote( $className, '/' ) . '\b/i';
 
 		for ( $i = $useEndPtr + 1; $i < $phpcsFile->numTokens; $i++ ) {
@@ -50,7 +51,7 @@ class UnusedUseSniff implements Sniff {
 				)
 				|| ( $token['code'] === T_DOC_COMMENT_TAG
 					&& $tokens[$i + 2]['code'] === T_DOC_COMMENT_STRING
-					&& preg_match( '/^@(?:expectedException|param|return|throw|type|var)/i', $token['content'] )
+					&& preg_match( '/^@(?:' . $docTagPattern . ')/i', $token['content'] )
 					&& preg_match( '/^' . $varDocPattern, $tokens[$i + 2]['content'] )
 				)
 				|| ( $token['code'] === T_COMMENT
