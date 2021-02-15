@@ -22,12 +22,29 @@ use SplFileInfo;
  */
 class WikibaseStandardTest extends TestCase {
 
-	public function provideIsolatedTestCases() {
-		foreach ( $this->scanPhpFiles( __DIR__ ) as $file ) {
-			if ( $file->getPath() === __DIR__ ) {
-				continue;
-			}
+	public function provideIntegrationTestCases() {
+		foreach ( $this->scanPhpFiles( __DIR__ . '/Integration' ) as $file ) {
+			yield $file->getFilename() => [ $file->getPathname() ];
+		}
+	}
 
+	/**
+	 * @dataProvider provideIntegrationTestCases
+	 */
+	public function testWikibaseStandard( $file ) {
+		$config = new Config();
+		$config->standards = [ __DIR__ . '/..' ];
+
+		$phpCsFile = new DummyFile( file_get_contents( $file ), new Ruleset( $config ), $config );
+		$phpCsFile->process();
+		// Intentionally only test the fixer, reporting is already covered by the isolated tests
+		$phpCsFile->fixer->fixFile();
+		$actual = $phpCsFile->fixer->getContents();
+		$this->assertSame( file_get_contents( $file . '.fixed' ), $actual );
+	}
+
+	public function provideIsolatedTestCases() {
+		foreach ( $this->scanPhpFiles( __DIR__ . '/Isolation' ) as $file ) {
 			$shortName = $file->getBasename( '.' . $file->getExtension() );
 			$sniff = 'Wikibase.' . basename( $file->getPath() ) . '.' . $shortName;
 
@@ -44,6 +61,7 @@ class WikibaseStandardTest extends TestCase {
 
 		$config = new Config();
 		$config->standards = [ __DIR__ . '/..' ];
+		// Test each sniff in isolation, in contrast to testing the whole standard
 		$config->sniffs = [ $sniff ];
 		$config->reportWidth = 140;
 
